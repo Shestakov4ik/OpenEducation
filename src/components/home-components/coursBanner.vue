@@ -56,7 +56,7 @@ export default {
       if (error) {
         console.error('Error fetching data:', error.message);
       } else {
-        this.items = data;
+        this.items = data.slice(0, 3);
       }
     }
   }
@@ -87,17 +87,17 @@ export default {
 .all-courses-button {
   font-size: 18px;
   padding: 10px 20px;
-  background-color: #78258D;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  background-color: white;
+  color: #78258D;
+  border: 2px solid #78258D;
+  border-radius: 8px;
   cursor: pointer;
 }
 
 .slider {
   display: flex;
-  flex-wrap: wrap;
-  overflow-x: auto;
+  justify-content: center;
+
   gap: 20px;
 }
 

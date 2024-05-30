@@ -61,7 +61,7 @@ export default {
 
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: center;
 
   padding: 50px 0;
 }

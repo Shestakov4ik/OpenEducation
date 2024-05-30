@@ -1,7 +1,7 @@
 <template>
   <header id="header">
     <div id="logo">
-      <img src="../assets/logo.svg" alt="Logo" height="46">
+      <img src="../../assets/logo/logo.svg" alt="Logo" height="46">
     </div>
     <nav id="menu">
       <a :class="{ 'selected': page === 'home' }" @click="getPage('home')">Главная</a>
@@ -32,15 +32,15 @@ export default {
 <style scoped>
 @font-face {
   font-family: 'Gilroy-Light';
-  src: url("../assets/fonts/Gilroy-Light.otf") format('opentype');
+  src: url("../../assets/fonts/Gilroy-Light.otf") format('opentype');
 }
 @font-face {
   font-family: 'Gilroy-ExtraBold';
-  src: url("../assets/fonts/Gilroy-ExtraBold.otf") format('opentype');
+  src: url("../../assets/fonts/Gilroy-ExtraBold.otf") format('opentype');
 }
 @font-face {
   font-family: 'Gilroy-Bold';
-  src: url("../assets/fonts/gilroy-bold.ttf") format('opentype');
+  src: url("../../assets/fonts/gilroy-bold.ttf") format('opentype');
 }
 
 .selected {

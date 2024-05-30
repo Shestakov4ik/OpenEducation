@@ -4,6 +4,8 @@
       <Banner />
       <BannerCourses/>
       <BannerWithBlocks/>
+      <BannerTasks/>
+      <BannerTariff/>
     </div>
 
   </div>
@@ -11,30 +13,34 @@
 
 <script>
 import Banner from '@/components/home-components/banner.vue';
-import BannerWithBlocks from '@/components/home-components/contentbanner.vue';
-import BannerCourses from '@/components/home-components/cours.vue'
+import BannerWithBlocks from '@/components/home-components/contentBanner.vue';
+import BannerCourses from '@/components/home-components/coursBanner.vue'
+import BannerTasks from '@/components/home-components/tasksBanner.vue'
+import BannerTariff from '@/components/other-components/tariff.vue'
 
 export default {
   name: 'Home',
   components: {
     Banner,
     BannerWithBlocks,
-    BannerCourses// Убедитесь, что имя компонента соответствует импорту
+    BannerCourses,
+    BannerTasks,
+    BannerTariff
   }
 }
 </script>
 
 <style scoped>
 .container {
-  padding: 100px 240px; /* Общие отступы для всего контейнера */
-  box-sizing: border-box; /* Учитывать отступы в ширину и высоту элемента */
+  padding: 100px 240px;
+  box-sizing: border-box;
 }
 
 .banner-wrapper {
-  margin-bottom: 100px; /* Отступ снизу между компонентами */
+  margin-bottom: 100px;
 }
 
 .banner-wrapper:last-child {
-  margin-bottom: 0; /* Убрать отступ у последнего компонента */
+  margin-bottom: 0;
 }
 </style>
