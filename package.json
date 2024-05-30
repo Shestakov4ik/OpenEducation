@@ -10,8 +10,14 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.43.4",
+    "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
     "cli": "^1.0.1",
-    "vue": "^3.4.21"
+    "express": "^4.19.2",
+    "twilio": "^5.1.0",
+    "v-mask": "^2.3.0",
+    "vue": "^3.4.21",
+    "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

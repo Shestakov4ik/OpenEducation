@@ -9,7 +9,9 @@
       <a :class="{ 'selected': page === 'tasks' }" @click="getPage('tasks')">Все задания</a>
       <a :class="{ 'selected': page === 'contacts' }" @click="getPage('contacts')" href="#contacts">Контакты</a>
     </nav>
-    <a href="#auth" id="auth">Войти</a>
+    <a id="auth" @click="getPage('auth')">Войти</a>
+
+
   </header>
 </template>
 
@@ -71,6 +73,7 @@ export default {
   color: #333333;
   cursor: pointer;
 }
+
 #auth {
   padding: 14px 30px;
   background-color: #78258D;
