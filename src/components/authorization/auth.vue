@@ -5,7 +5,7 @@
       <p class="auth-description">На указанный номер придёт СМС с кодом подтверждения</p>
       <label class="auth-label">Телефон</label>
 
-      <!-- Поле ввода номера телефона с маской -->
+
       <input v-model="phone" class="auth-input" v-mask="'+7 (###) ###-##-##'" placeholder="+7 (___) ___-__-__">
 
       <button class="auth-button" @click="submit">Продолжить</button>
@@ -25,16 +25,16 @@ export default {
   methods: {
     async submit() {
       const formattedPhone = this.phone.replace(/\D/g, '');
-      console.log('Formatted Phone:', formattedPhone); // Логирование для проверки
+      console.log('Formatted Phone:', formattedPhone);
 
       if (formattedPhone.length === 11) {
 
 
         const username = 'shestakov4ij@mail.ru';
         const password = 'y7Vi-PDb2uENSJPtaz0Gv7NYVPkQKb2M';
-        const sign = 'SMS Aero'; // Ваша подпись отправителя
+        const sign = 'SMS Aero';
         const message = 'Ваш код подтверждения: 1234';
-        const formattedPhone = '79632948103'; // Ваш номер телефона
+        const formattedPhone = '79632948103';
 
         const url = `https://gate.smsaero.ru/v2/sms/send?number=${formattedPhone}&text=${message}&sign=${sign}&channel=DIRECT`;
 

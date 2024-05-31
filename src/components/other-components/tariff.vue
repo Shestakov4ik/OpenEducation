@@ -47,9 +47,9 @@ export default {
         const r = (rgb >> 16) & 0xff;
         const g = (rgb >> 8) & 0xff;
         const b = (rgb >> 0) & 0xff;
-        return `rgba(${r}, ${g}, ${b}, 0.25)`; // 0.25 — это 25% прозрачности
+        return `rgba(${r}, ${g}, ${b}, 0.25)`;
       }
-      return hexColor; // Возвращает исходный цвет, если не в формате HEX
+      return hexColor;
     }
   }
 }

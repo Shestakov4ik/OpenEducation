@@ -2,7 +2,7 @@
   <div class="footer-container">
     <div class="footer-left">
       <img src="../../assets/logo/logo-white.svg" alt="Logo" class="logo">
-      <p class="description">Краткое описание вашего сайта.</p>
+      <p class="description">Краткое описание сайта.</p>
       <div class="cards">
         <img src="@/assets/cards/visa.png" alt="Card1" class="card card1">
         <img src="@/assets/cards/mcard.png" alt="Card2" class="card card2">

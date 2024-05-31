@@ -2,7 +2,7 @@
   <div>
     <Header @change-page="PageChange"/>
     <component :is="currentComponent"/>
-    <Auth v-if="authOpened" @close="closeAuth" /> <!-- Добавляем условный рендеринг для компонента Auth -->
+    <Auth v-if="authOpened" @close="closeAuth" />
     <Footer class="footer"/>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       currentComponent: 'Home',
-      authOpened: false // Флаг для отслеживания открытия Auth
+      authOpened: false
     }
   },
   methods: {
@@ -43,14 +43,14 @@ export default {
           this.currentComponent = 'Tasks';
           break;
         case 'auth':
-          this.authOpened = true; // Устанавливаем флаг authOpened в true
+          this.authOpened = true;
           break;
         default:
           this.currentComponent = 'Home';
       }
     },
     closeAuth() {
-      this.authOpened = false; // Сбрасываем флаг authOpened при закрытии Auth
+      this.authOpened = false;
     }
   }
 }
