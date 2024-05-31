@@ -126,6 +126,7 @@ export default {
   border-radius: 8px;
   margin-bottom: 40px;
   box-sizing: border-box;
+  font-family: Gilroy-Light;
 }
 
 .auth-button {
@@ -138,6 +139,7 @@ export default {
   border-radius: 8px;
   cursor: pointer;
   margin-bottom: 20px;
+  font-family: 'Gilroy-Light';
 }
 
 .auth-close {
@@ -149,5 +151,6 @@ export default {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  font-family: Gilroy-Light;
 }
 </style>

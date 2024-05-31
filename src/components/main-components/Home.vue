@@ -32,7 +32,7 @@ export default {
 
 <style scoped>
 .container {
-  padding: 100px 240px;
+  padding: 50px 240px 100px 240px;
   box-sizing: border-box;
 }
 
