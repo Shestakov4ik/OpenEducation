@@ -4,14 +4,20 @@
       <h1 id="openedu">Open Education</h1>
       <h2 id="title">Онлайн-курсы для айтишников</h2>
       <p id="description">Достигайте своих целей с помощью доступных и интересных курсов</p>
-      <button id="try">Попробовать бесплатно</button>
+      <button id="try" @click="goToCourses">Попробовать бесплатно</button>
     </div>
     <img src="@/assets/men-num1.svg" alt="Men1" id="men-num1">
   </div>
 </template>
 
 <script>
-
+export default {
+  methods: {
+    goToCourses() {
+      this.$router.push({ name: 'courses' });
+    }
+  }
+}
 </script>
 
 <style scoped>

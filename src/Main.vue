@@ -1,64 +1,52 @@
 <template>
   <div>
     <Header @change-page="PageChange"/>
-    <component :is="currentComponent"/>
+    <router-view/>
     <Auth v-if="authOpened" @close="closeAuth" />
     <Footer class="footer"/>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue';
 import Header from './components/other-components/Header.vue';
 import Footer from './components/other-components/Footer.vue';
-import Home from './components/main-components/Home.vue';
-import Courses from './components/main-components/Courses.vue';
-import Tasks from './components/main-components/Tasks.vue';
 import Auth from './components/authorization/auth.vue';
 
 export default {
   components: {
     Header,
     Footer,
-    Home,
-    Courses,
-    Tasks,
     Auth
   },
-  data() {
-    return {
-      currentComponent: 'Home',
-      authOpened: false
-    }
-  },
-  methods: {
-    PageChange(page) {
-      switch (page) {
-        case 'home':
-          this.currentComponent = 'Home';
-          break;
-        case 'courses':
-          this.currentComponent = 'Courses';
-          break;
-        case 'tasks':
-          this.currentComponent = 'Tasks';
-          break;
-        case 'auth':
-          this.authOpened = true;
-          break;
-        default:
-          this.currentComponent = 'Home';
+  setup() {
+    const authOpened = ref(false);
+
+    const PageChange = (page) => {
+      if (page === 'auth') {
+        authOpened.value = true;
+      } else {
+        authOpened.value = false;
+        router.push({name: page});
       }
-    },
-    closeAuth() {
-      this.authOpened = false;
-    }
+    };
+
+    const closeAuth = () => {
+      authOpened.value = false;
+      router.back();
+    };
+
+    return {
+      authOpened,
+      PageChange,
+      closeAuth
+    };
   }
-}
+};
 </script>
 
 <style scoped>
-.footer{
+.footer {
   padding: 100px 240px;
 }
-
 </style>

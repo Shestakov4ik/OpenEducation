@@ -2,7 +2,7 @@
   <div class="courses-container">
     <div class="header">
       <h1>Популярные задания</h1>
-      <button class="all-courses-button">Все задания</button>
+      <button class="all-courses-button" @click="goToAllTasks">Все задания</button>
     </div>
     <div class="slider-container">
       <div class="slider" ref="slider">
@@ -30,9 +30,6 @@
   </div>
 </template>
 
-
-
-
 <script>
 import { createClient } from '@supabase/supabase-js';
 
@@ -58,11 +55,16 @@ export default {
       } else {
         this.items = data.slice(0, 3);
       }
-    }
+    },
+    goToAllTasks() {
+      this.$router.push({ name: 'Tasks' });
+    },
   }
 }
-
 </script>
+
+
+
 
 
 <style scoped>

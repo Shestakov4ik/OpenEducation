@@ -5,7 +5,7 @@
       <p id="description"><span id="openEduMini">OpenEdu</span>
         подойдет всем, кто хочет за короткий срок
         качественно изменить свою жизнь, освоив специальность.</p>
-      <button id="try">Попробовать бесплатно</button>
+      <button id="try" @click="goToCourses">Попробовать бесплатно</button>
     </div>
     <div id="blocks-container">
       <div class="block" v-for="(block, index) in blocks" :key="index">
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+
 import presentationImage from '@/assets/banner-blocks/presentation.svg';
 import graduationcupImage from '@/assets/banner-blocks/graduationcup.svg';
 import briefcaseImage from '@/assets/banner-blocks/briefcase.svg';
@@ -50,10 +52,18 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    goToCourses() {
+      this.$router.push({ name: 'courses' });
+    }
   }
 }
 
 </script>
+
+
+
 
 <style scoped>
 #banner {

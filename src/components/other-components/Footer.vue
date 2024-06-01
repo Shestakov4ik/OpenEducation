@@ -12,12 +12,11 @@
     <div class="footer-middle">
       <h2 class="info-title">Информация</h2>
       <ul class="info-menu">
-        <li>Главная</li>
-        <li>Все курсы</li>
-        <li>Все задания</li>
-        <li>Регистрация</li>
-        <li>Личный кабинет</li>
-        <li>Контакты</li>
+        <li @click="goToPage('/')">Главная</li>
+        <li @click="goToPage('/courses')">Все курсы</li>
+        <li @click="goToPage('/tasks')">Все задания</li>
+        <li @click="goToPage('/profile')">Личный кабинет</li>
+        <li @click="goToPage('/contacts')">Контакты</li>
       </ul>
     </div>
     <div class="footer-right">
@@ -26,9 +25,9 @@
       <p class="email">email@example.com</p>
       <p class="address">ул. Примерная, д. 1, Москва, Россия</p>
       <div class="social-icons">
-        <img src="@/assets/social-media/youtube.svg" alt="SocialIcon1" class="social-icon">
-        <img src="@/assets/social-media/twitter.svg" alt="SocialIcon2" class="social-icon">
-        <img src="@/assets/social-media/vk.svg" alt="SocialIcon3" class="social-icon">
+        <img src="@/assets/social-media/youtube.svg" alt="SocialIcon1" class="social-icon" @click="goToSocialMedia('https://www.youtube.com/')">
+        <img src="@/assets/social-media/twitter.svg" alt="SocialIcon2" class="social-icon" @click="goToSocialMedia('https://twitter.com/')">
+        <img src="@/assets/social-media/vk.svg" alt="SocialIcon3" class="social-icon" @click="goToSocialMedia('https://vk.com/')">
       </div>
     </div>
   </div>
@@ -37,8 +36,17 @@
 <script>
 export default {
   name: 'Footer',
+  methods: {
+    goToPage(path) {
+      this.$router.push({ path });
+    },
+    goToSocialMedia(url) {
+      window.open(url, '_blank');
+    }
+  }
 }
 </script>
+
 
 <style scoped>
 .footer-container {
@@ -111,6 +119,7 @@ export default {
 
 .info-menu li {
   margin-bottom: 11px;
+  cursor: pointer;
 }
 
 .footer-right {

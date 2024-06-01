@@ -4,31 +4,19 @@
       <img src="../../assets/logo/logo.svg" alt="Logo" height="46">
     </div>
     <nav id="menu">
-      <a :class="{ 'selected': page === 'home' }" @click="getPage('home')">Главная</a>
-      <a :class="{ 'selected': page === 'courses' }" @click="getPage('courses')">Все курсы</a>
-      <a :class="{ 'selected': page === 'tasks' }" @click="getPage('tasks')">Все задания</a>
-      <a :class="{ 'selected': page === 'contacts' }" @click="getPage('contacts')" href="#contacts">Контакты</a>
+      <router-link to="/" exact-active-class="selected">Главная</router-link>
+      <router-link to="/courses" exact-active-class="selected">Все курсы</router-link>
+      <router-link to="/tasks" exact-active-class="selected">Все задания</router-link>
+      <router-link to="/contacts" exact-active-class="selected">Контакты</router-link>
     </nav>
-    <a id="auth" @click="getPage('auth')">Войти</a>
-
-
+    <a id="auth" @click="$emit('change-page', 'auth')">Войти</a>
   </header>
 </template>
 
 <script>
 export default {
-  data(){
-    return {
-      page: 'home',
-    }
-  },
-  methods:{
-    getPage(page){
-      this.page = page;
-      this.$emit('change-page', page);
-    }
-  }
-}
+  name: 'Header',
+};
 </script>
 
 <style scoped>
@@ -64,7 +52,6 @@ export default {
 #menu {
   flex-grow: 1;
   justify-content: center;
-
 }
 #menu a {
   margin: 0 15px;
@@ -73,12 +60,12 @@ export default {
   color: #333333;
   cursor: pointer;
 }
-
 #auth {
   padding: 14px 30px;
   background-color: #78258D;
   color: white;
   text-decoration: none;
   border-radius: 10px;
+  cursor: pointer;
 }
 </style>

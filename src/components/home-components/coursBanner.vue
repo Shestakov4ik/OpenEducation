@@ -2,7 +2,7 @@
   <div class="courses-container">
     <div class="header">
       <h1>Курсы по IT-специальностям</h1>
-      <button class="all-courses-button">Все курсы</button>
+      <button class="all-courses-button" @click="goToAllCourses">Все курсы</button>
     </div>
     <div class="slider-container">
       <div class="slider" ref="slider">
@@ -30,17 +30,15 @@
   </div>
 </template>
 
-
-
-
 <script>
 import { createClient } from '@supabase/supabase-js';
 
 export default {
   data() {
     return {
-      items: []
-    }
+      items: [],
+      currentIndex: 0,
+    };
   },
   created() {
     this.fetchData();
@@ -58,12 +56,18 @@ export default {
       } else {
         this.items = data.slice(0, 3);
       }
-    }
-  }
-}
-
+    },
+    goToAllCourses() {
+      this.$router.push({ name: 'courses' });
+    },
+    scrollTo(index) {
+      this.currentIndex = index;
+      const offset = index * this.$refs.slider.clientWidth;
+      this.$refs.slider.scrollLeft = offset;
+    },
+  },
+};
 </script>
-
 
 <style scoped>
 .courses-container {
@@ -97,7 +101,6 @@ export default {
 .slider {
   display: flex;
   justify-content: center;
-
   gap: 20px;
 }
 
@@ -153,5 +156,3 @@ export default {
   color: #78258D;
 }
 </style>
-
-
