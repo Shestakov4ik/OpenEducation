@@ -5,7 +5,7 @@
       <p class="auth-description">На указанный номер придёт СМС с кодом подтверждения</p>
       <label class="auth-label">Телефон</label>
       <input v-model="phone" class="auth-input" v-mask="'+7 (###) ###-##-##'" placeholder="+7 (___) ___-__-__">
-      <button class="auth-button" @click="proceed">Продолжить</button>
+      <button class="auth-button" @click="submit">Продолжить</button>
       <button class="auth-close" @click="close">Закрыть</button>
     </div>
   </div>
@@ -19,18 +19,46 @@ export default {
     };
   },
   methods: {
-    proceed() {
-      if (this.phoneIsValid()) {
-        // Переход на компонент Verification при нажатии кнопки "Продолжить"
-        this.$router.push({ name: 'Verification', params: { phone: this.phone } });
+    async submit() {
+      const formattedPhone = this.phone.replace(/\D/g, '');
+      console.log('Formatted Phone:', formattedPhone);
+
+      if (formattedPhone.length === 11) {
+        const username = 'shestakov4ij@mail.ru';
+        const password = 'y7Vi-PDb2uENSJPtaz0Gv7NYVPkQKb2M';
+        const sign = 'SMS Aero';
+        const message = 'Ваш код подтверждения: 1234';
+
+        const url = `https://gate.smsaero.ru/v2/sms/send?number=${formattedPhone}&text=${message}&sign=${sign}&channel=DIRECT`;
+
+        const response = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Basic ${btoa(`${username}:${password}`)}`,
+            'Content-Type': 'application/json'
+          }
+        });
+
+        console.log('HTTP Response Status:', response.status);
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('HTTP Error Response Text:', errorText);
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Response Data:', data);
+
+        if (data.success) {
+          alert('СМС с кодом подтверждения отправлено!');
+        } else {
+          console.error('Ошибка при отправке СМС:', data.message);
+          alert('Произошла ошибка при отправке СМС. Пожалуйста, попробуйте еще раз.');
+        }
       } else {
         alert('Пожалуйста, введите корректный номер телефона.');
       }
-    },
-
-    phoneIsValid() {
-      // Валидация номера телефона, вернет true если номер корректный, иначе false
-      return this.phone.replace(/\D/g, '').length === 11;
     },
     close() {
       this.$emit('close');
@@ -39,8 +67,6 @@ export default {
   },
 };
 </script>
-
-
 
 
 <style scoped>

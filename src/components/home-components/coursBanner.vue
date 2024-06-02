@@ -11,8 +11,8 @@
           <div class="content">
             <h2>{{ item.title }}</h2>
             <div class="details">
-              <span class="course-label">Курс</span>
-              <span class="course-type">{{ item.type }}</span>
+              <span class="course-tariff">{{ getTariffName(item.id_tariff) }}</span>
+              <span class="course-type">{{ getTypeName(item.id_type) }}</span>
             </div>
           </div>
         </div>
@@ -31,13 +31,15 @@
 </template>
 
 <script>
-import { createClient } from '@supabase/supabase-js';
+import supabase from '@/supabase';
 
 export default {
   data() {
     return {
       items: [],
       currentIndex: 0,
+      tariffs: [],
+      types: [],
     };
   },
   created() {
@@ -45,17 +47,48 @@ export default {
   },
   methods: {
     async fetchData() {
-      const Url = 'https://bvyrptbwohqfvfnsnduz.supabase.co/';
-      const Key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2eXJwdGJ3b2hxZnZmbnNuZHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ1ODcyNTEsImV4cCI6MjAzMDE2MzI1MX0.QlGpDnDw8JRkqhgVP-TsE0QhmMejPaDHbIEsllicuK0';
-      const SP = createClient(Url, Key);
-
-      const { data, error } = await SP.from('Courses').select('*');
-
-      if (error) {
-        console.error('Error fetching data:', error.message);
-      } else {
-        this.items = data.slice(0, 3);
+      const { data: courses, error: coursesError } = await supabase.from('Courses').select('*');
+      if (coursesError) {
+        console.error('Error fetching courses:', coursesError.message);
+        return;
       }
+
+      const { data: icons, error: iconsError } = await supabase.from('icons').select('*');
+      if (iconsError) {
+        console.error('Error fetching icons:', iconsError.message);
+        return;
+      }
+
+      const { data: tariffs, error: tariffsError } = await supabase.from('Tariff').select('*');
+      if (tariffsError) {
+        console.error('Error fetching tariffs:', tariffsError.message);
+        return;
+      }
+
+      const { data: types, error: typesError } = await supabase.from('Types').select('*');
+      if (typesError) {
+        console.error('Error fetching types:', typesError.message);
+        return;
+      }
+
+      this.tariffs = tariffs;
+      this.types = types;
+
+      this.items = courses.map(course => {
+        const icon = icons.find(icon => icon.id === course.id_icons);
+        return {
+          ...course,
+          icon_url: icon ? icon.url : ''
+        };
+      }).slice(0, 3);
+    },
+    getTariffName(tariffId) {
+      const tariff = this.tariffs.find(t => t.id === tariffId);
+      return tariff ? tariff.name : '';
+    },
+    getTypeName(typeId) {
+      const type = this.types.find(t => t.id === typeId);
+      return type ? type.type : '';
     },
     goToAllCourses() {
       this.$router.push({ name: 'courses' });
@@ -108,19 +141,19 @@ export default {
   display: inline-block;
   vertical-align: top;
   width: 440px;
-  height: 264px;
+  height: 260px;
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
   padding: 40px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
 
 .icon {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   margin-bottom: 20px;
 }
 
@@ -144,11 +177,9 @@ export default {
   font-family: 'Gilroy-Light', sans-serif;
 }
 
-.course-label {
+.course-tariff {
   font-size: 16px;
-  background-color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
+  color: black;
 }
 
 .course-type {

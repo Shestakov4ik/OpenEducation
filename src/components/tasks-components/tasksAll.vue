@@ -1,6 +1,6 @@
 <template>
-  <div class="courses-container">
-    <h1 class="title">Курсы</h1>
+  <div class="tasks-container">
+    <h1 class="title">Задания</h1>
     <div class="filters">
       <button
           @click="applyTypeFilter(null)"
@@ -17,20 +17,19 @@
         {{ type.type }}
       </button>
     </div>
-    <div class="courses-content">
-      <div class="courses-list">
+    <div class="tasks-content">
+      <div class="tasks-list">
         <div
-            class="course-block"
-            v-for="course in filteredCourses"
-            :key="course.id"
-            :style="{ backgroundColor: course.back_color }"
+            class="task-block"
+            v-for="task in filteredTasks"
+            :key="task.id"
         >
-          <img :src="course.icon_url" alt="Icon" class="icon">
           <div class="content">
-            <h2>{{ course.title }}</h2>
+            <h2>{{ task.title }}</h2>
+            <h3>{{ task.description }}</h3>
             <div class="details">
-              <span class="course-type">{{ getTariffName(course.id_tariff) }}</span>
-              <span class="tariff-type">{{ getTypeName(course.id_type) }}</span>
+              <span class="task-tariff">{{ getTariffName(task.id_tariff) }}</span>
+              <span class="task-type">{{ getTypeName(task.id_type) }}</span>
             </div>
           </div>
         </div>
@@ -54,7 +53,7 @@ import supabase from '@/supabase';
 export default {
   data() {
     return {
-      courses: [],
+      tasks: [],
       types: [],
       tariffs: [],
       currentTypeFilter: null,
@@ -62,15 +61,15 @@ export default {
     };
   },
   computed: {
-    filteredCourses() {
-      let filtered = this.courses;
+    filteredTasks() {
+      let filtered = this.tasks;
 
       if (this.currentTypeFilter !== null) {
-        filtered = filtered.filter(course => course.id_type === this.currentTypeFilter);
+        filtered = filtered.filter(task => task.id_type === this.currentTypeFilter);
       }
 
       if (this.selectedTariffs.length > 0) {
-        filtered = filtered.filter(course => this.selectedTariffs.includes(course.id_tariff));
+        filtered = filtered.filter(task => this.selectedTariffs.includes(task.id_tariff));
       }
 
       return filtered;
@@ -82,8 +81,8 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const { data: coursesData, error: coursesError } = await supabase.from('Courses').select('*');
-        if (coursesError) throw coursesError;
+        const { data: tasksData, error: tasksError } = await supabase.from('Tasks').select('*');
+        if (tasksError) throw tasksError;
 
         const { data: typesData, error: typesError } = await supabase.from('Types').select('*');
         if (typesError) throw typesError;
@@ -91,17 +90,7 @@ export default {
         const { data: tariffsData, error: tariffsError } = await supabase.from('Tariff').select('*');
         if (tariffsError) throw tariffsError;
 
-        const { data: iconsData, error: iconsError } = await supabase.from('icons').select('*');
-        if (iconsError) throw iconsError;
-
-        this.courses = coursesData.map(course => {
-          const icon = iconsData.find(icon => icon.id === course.id_icons);
-          return {
-            ...course,
-            icon_url: icon ? icon.url : ''
-          };
-        });
-
+        this.tasks = tasksData;
         this.types = typesData;
         this.tariffs = tariffsData;
       } catch (error) {
@@ -124,14 +113,17 @@ export default {
 </script>
 
 <style scoped>
-.courses-container {
+.tasks-container {
+  padding-top: 60px;
+  padding-bottom: 60px;
   letter-spacing: 0.5px;
   font-family: 'Gilroy-Light', sans-serif;
 }
 
-.header h1 {
-  font-size: 46px;
+.title {
   font-family: Gilroy-ExtraBold;
+  font-size: 46px;
+  margin-bottom: 30px;
 }
 
 .filters {
@@ -155,12 +147,12 @@ export default {
   color: white;
 }
 
-.courses-content {
+.tasks-content {
   display: flex;
   justify-content: space-between;
 }
 
-.courses-list {
+.tasks-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -168,7 +160,7 @@ export default {
   max-width: calc(100% - 50px);
 }
 
-.course-block {
+.task-block {
   display: inline-block;
   vertical-align: top;
   width: 440px;
@@ -180,17 +172,7 @@ export default {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   box-sizing: border-box;
-}
-
-.icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 20px;
-}
-
-.title {
-  font-family: Gilroy-ExtraBold;
-  font-size: 46px;
+  background-color: #fff;
 }
 
 .content {
@@ -202,8 +184,13 @@ export default {
 
 .content h2 {
   margin: 0;
-  font-size: 26px;
+  font-size: 24px;
   font-family: Gilroy-Bold;
+}
+
+.content h3 {
+  font-size: 16px;
+  font-family: Gilroy-Light;
 }
 
 .details {
@@ -213,13 +200,13 @@ export default {
   font-family: 'Gilroy-Light', sans-serif;
 }
 
-.course-type {
+.task-tariff {
   font-size: 16px;
-
-  color: #000000;
+  color: black;
 }
 
-.tariff-type{
+.task-type {
+  font-size: 16px;
   color: #78258D;
 }
 
@@ -241,11 +228,10 @@ export default {
 
 .tariff-option {
   font-size: 16px;
-
 }
 
 @media (max-width: 1200px) {
-  .course-block {
+  .task-block {
     flex: 1 1 calc(50% - 20px);
     max-width: calc(50% - 20px);
   }
@@ -256,7 +242,7 @@ export default {
 }
 
 @media (max-width: 768px) {
-  .course-block {
+  .task-block {
     flex: 1 1 100%;
     max-width: 100%;
   }
