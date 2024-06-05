@@ -114,7 +114,7 @@ export default {
 
 <style scoped>
 .tasks-container {
-  padding-top: 60px;
+
   padding-bottom: 60px;
   letter-spacing: 0.5px;
   font-family: 'Gilroy-Light', sans-serif;

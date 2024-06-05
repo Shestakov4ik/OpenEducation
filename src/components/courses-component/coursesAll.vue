@@ -126,6 +126,7 @@ export default {
 <style scoped>
 .courses-container {
   letter-spacing: 0.5px;
+  padding-bottom: 60px;
   font-family: 'Gilroy-Light', sans-serif;
 }
 
