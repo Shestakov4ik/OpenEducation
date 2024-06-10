@@ -8,11 +8,11 @@
       <div class="slider" ref="slider">
         <div class="data-block" v-for="item in items" :key="item.id">
           <div class="content">
-            <h2>{{ item.title }}</h2>
+            <h2>{{ item.name }}</h2>
             <h3>{{ item.description }}</h3>
             <div class="details">
               <span class="task-tariff">{{ getTariffName(item.id_tariff) }}</span>
-              <span class="task-type">{{ getTypeName(item.id_type) }}</span>
+              <span class="task-type">{{ getTypeName(item.id_direction) }}</span>
             </div>
           </div>
         </div>
@@ -47,19 +47,19 @@ export default {
   },
   methods: {
     async fetchData() {
-      const { data: tasks, error: tasksError } = await supabase.from('Tasks').select('*');
+      const { data: tasks, error: tasksError } = await supabase.from('tasks').select('*');
       if (tasksError) {
         console.error('Error fetching tasks:', tasksError.message);
         return;
       }
 
-      const { data: tariffs, error: tariffsError } = await supabase.from('Tariff').select('*');
+      const { data: tariffs, error: tariffsError } = await supabase.from('tariff').select('*');
       if (tariffsError) {
         console.error('Error fetching tariffs:', tariffsError.message);
         return;
       }
 
-      const { data: types, error: typesError } = await supabase.from('Types').select('*');
+      const { data: types, error: typesError } = await supabase.from('direction').select('*');
       if (typesError) {
         console.error('Error fetching types:', typesError.message);
         return;
@@ -75,10 +75,10 @@ export default {
     },
     getTypeName(typeId) {
       const type = this.types.find(t => t.id === typeId);
-      return type ? type.type : '';
+      return type ? type.name : '';
     },
     goToAllTasks() {
-      this.$router.push({ name: 'Tasks' });
+      this.$router.push({ name: 'tasks' });
     },
     scrollTo(index) {
       this.currentIndex = index;
@@ -136,6 +136,7 @@ export default {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   box-sizing: border-box;
+  background: white; /* изменение backgroundColor на background */
 }
 
 .content {

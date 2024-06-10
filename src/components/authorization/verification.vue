@@ -45,10 +45,10 @@ export default {
     submit() {
       const pin = this.pin1 + this.pin2 + this.pin3 + this.pin4;
       console.log('Submitted PIN:', pin);
-      // Здесь можно выполнить проверку пин-кода и выполнить авторизацию
+
     },
     resendSMS() {
-      // Здесь можно реализовать повторную отправку СМС
+
       alert('СМС с кодом подтверждения отправлено!');
     },
     changeNumber() {

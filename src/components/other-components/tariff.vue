@@ -6,8 +6,8 @@
         <div class="plan-title" :style="{ backgroundColor: plan.color }">{{ plan.name }}</div>
         <div class="plan-details">
           <div class="price">{{ plan.cost }} руб/мес</div>
-          <div class="courses">{{ plan.count_courses }} курсов</div>
-          <div class="tasks">{{ plan.counts_taks }} заданий</div>
+          <div class="courses">{{ plan.count_course }} курсов</div>
+          <div class="tasks">{{ plan.count_task }} заданий</div>
         </div>
         <button class="try-button" :style="{ backgroundColor: plan.color }">Попробовать</button>
       </div>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { createClient } from '@supabase/supabase-js';
+import supabase from '@/supabase';
 
 export default {
   data() {
@@ -29,16 +29,16 @@ export default {
   },
   methods: {
     async fetchData() {
-      const Url = 'https://bvyrptbwohqfvfnsnduz.supabase.co/';
-      const Key = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2eXJwdGJ3b2hxZnZmbnNuZHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ1ODcyNTEsImV4cCI6MjAzMDE2MzI1MX0.QlGpDnDw8JRkqhgVP-TsE0QhmMejPaDHbIEsllicuK0';
-      const SP = createClient(Url, Key);
+      try {
+        const { data, error } = await supabase.from('tariff').select('*').order('id');
 
-      const { data, error } = await SP.from('Tariff').select('*').order('id');
-
-      if (error) {
+        if (error) {
+          throw error;
+        } else {
+          this.plans = data;
+        }
+      } catch (error) {
         console.error('Error fetching data:', error.message);
-      } else {
-        this.plans = data;
       }
     },
     getButtonColor(hexColor) {
@@ -54,6 +54,8 @@ export default {
   }
 }
 </script>
+
+
 
 <style scoped>
 .tariff-plans-container {

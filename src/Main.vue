@@ -1,8 +1,10 @@
 <template>
   <div>
-    <Header @change-page="PageChange"/>
+    <Header class="header" @change-page="PageChange"/>
     <router-view/>
     <Auth v-if="authOpened" @close="closeAuth" />
+
+
     <Footer class="footer"/>
   </div>
 </template>
@@ -15,17 +17,22 @@ import Header from './components/other-components/Header.vue';
 import Footer from './components/other-components/Footer.vue';
 import Auth from './components/authorization/auth.vue';
 import Verification from './components/authorization/verification.vue';
+import CoursesInfo  from "@/components/course-info/CoursesInfo.vue";
+import CourseBanner from "@/components/home-components/coursBanner.vue"
 
 export default {
   components: {
     Header,
     Footer,
     Auth,
-    Verification
+    Verification,
+    CoursesInfo,
+    CourseBanner,
   },
   setup() {
     const authOpened = ref(false);
     const verOpened = ref(false);
+    const infoOpened = ref(false);
 
     const PageChange = (page) => {
       if (page === 'auth') {
@@ -48,12 +55,19 @@ export default {
       PageChange,
       closeAuth
     };
+
+
   }
 };
 </script>
 
 <style scoped>
+
 .footer {
   padding: 100px 240px;
+}
+
+.header{
+  z-index: 900;
 }
 </style>

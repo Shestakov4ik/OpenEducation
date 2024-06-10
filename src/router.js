@@ -5,14 +5,17 @@ import Tasks from './components/main-components/Tasks.vue';
 import Contacts from './components/main-components/Contacts.vue';
 import Auth from './components/authorization/auth.vue';
 import Verification from './components/authorization/verification.vue';
+import CoursesInfo from "@/components/course-info/CoursesInfo.vue";
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
     { path: '/courses', name: 'courses', component: Courses },
-    { path: '/tasks', name: 'Tasks', component: Tasks },
+    { path: '/tasks', name: 'tasks', component: Tasks },
     { path: '/contacts', name: 'Contacts', component: Contacts },
     { path: '/auth', name: 'Auth', component: Auth },
-    { path: '/verification/:phone', name: 'Verification', component: Verification }
+    { path: '/verification/:phone', name: 'Verification', component: Verification },
+    { path: '/courseinfo:id', name: 'courseinfo', component: CoursesInfo },
+
 ];
 
 const router = createRouter({

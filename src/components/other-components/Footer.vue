@@ -49,6 +49,7 @@ export default {
 
 
 <style scoped>
+
 .footer-container {
   background-color: #78258D;
   padding: 100px 20px;

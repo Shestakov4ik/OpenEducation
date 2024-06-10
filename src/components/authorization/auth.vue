@@ -21,7 +21,6 @@ export default {
   methods: {
     proceed() {
       if (this.phoneIsValid()) {
-        // Переход на компонент Verification при нажатии кнопки "Продолжить"
         this.$router.push({ name: 'Verification', params: { phone: this.phone } });
       } else {
         alert('Пожалуйста, введите корректный номер телефона.');

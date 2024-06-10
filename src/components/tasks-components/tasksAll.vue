@@ -14,7 +14,7 @@
           @click="applyTypeFilter(type.id)"
           :class="['filter-button', { active: currentTypeFilter === type.id }]"
       >
-        {{ type.type }}
+        {{ type.name }}
       </button>
     </div>
     <div class="tasks-content">
@@ -25,11 +25,11 @@
             :key="task.id"
         >
           <div class="content">
-            <h2>{{ task.title }}</h2>
+            <h2>{{ task.name }}</h2>
             <h3>{{ task.description }}</h3>
             <div class="details">
               <span class="task-tariff">{{ getTariffName(task.id_tariff) }}</span>
-              <span class="task-type">{{ getTypeName(task.id_type) }}</span>
+              <span class="task-type">{{ getTypeName(task.id_direction) }}</span>
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@ export default {
       let filtered = this.tasks;
 
       if (this.currentTypeFilter !== null) {
-        filtered = filtered.filter(task => task.id_type === this.currentTypeFilter);
+        filtered = filtered.filter(task => task.id_direction === this.currentTypeFilter);
       }
 
       if (this.selectedTariffs.length > 0) {
@@ -81,13 +81,13 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const { data: tasksData, error: tasksError } = await supabase.from('Tasks').select('*');
+        const { data: tasksData, error: tasksError } = await supabase.from('tasks').select('*');
         if (tasksError) throw tasksError;
 
-        const { data: typesData, error: typesError } = await supabase.from('Types').select('*');
+        const { data: typesData, error: typesError } = await supabase.from('direction').select('*');
         if (typesError) throw typesError;
 
-        const { data: tariffsData, error: tariffsError } = await supabase.from('Tariff').select('*');
+        const { data: tariffsData, error: tariffsError } = await supabase.from('tariff').select('*');
         if (tariffsError) throw tariffsError;
 
         this.tasks = tasksData;
@@ -97,15 +97,15 @@ export default {
         console.error('Error fetching data:', error.message);
       }
     },
-    applyTypeFilter(typeId) {
-      this.currentTypeFilter = typeId;
+    applyTypeFilter(id_direction) {
+      this.currentTypeFilter = id_direction;
     },
-    getTypeName(typeId) {
-      const type = this.types.find(t => t.id === typeId);
-      return type ? type.type : '';
+    getTypeName(id_direction) {
+      const type = this.types.find(t => t.id === id_direction);
+      return type ? type.name : '';
     },
-    getTariffName(tariffId) {
-      const tariff = this.tariffs.find(t => t.id === tariffId);
+    getTariffName(id_tariff) {
+      const tariff = this.tariffs.find(t => t.id ===id_tariff);
       return tariff ? tariff.name : '';
     },
   },
@@ -114,7 +114,6 @@ export default {
 
 <style scoped>
 .tasks-container {
-
   padding-bottom: 60px;
   letter-spacing: 0.5px;
   font-family: 'Gilroy-Light', sans-serif;
@@ -179,17 +178,18 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
 }
 
 .content h2 {
   margin: 0;
   font-size: 24px;
   font-family: Gilroy-Bold;
+  padding-bottom: 10px;
 }
 
 .content h3 {
   font-size: 16px;
+  padding-bottom: 25px;
   font-family: Gilroy-Light;
 }
 

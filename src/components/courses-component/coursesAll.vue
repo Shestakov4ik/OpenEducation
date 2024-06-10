@@ -9,12 +9,12 @@
         Все
       </button>
       <button
-          v-for="type in types"
-          :key="type.id"
-          @click="applyTypeFilter(type.id)"
-          :class="['filter-button', { active: currentTypeFilter === type.id }]"
+          v-for="direction in directions"
+          :key="direction.id"
+          @click="applyTypeFilter(direction.id)"
+          :class="['filter-button', { active: currentTypeFilter === direction.id }]"
       >
-        {{ type.type }}
+        {{ direction.name }}
       </button>
     </div>
     <div class="courses-content">
@@ -23,58 +23,73 @@
             class="course-block"
             v-for="course in filteredCourses"
             :key="course.id"
-            :style="{ backgroundColor: course.back_color }"
+            :style="{ background: course.color }"
+            @click = "this.$emit('openInfo', course.id)"
+
+
         >
-          <img :src="course.icon_url" alt="Icon" class="icon">
-          <div class="content">
-            <h2>{{ course.title }}</h2>
-            <div class="details">
-              <span class="course-type">{{ getTariffName(course.id_tariff) }}</span>
-              <span class="tariff-type">{{ getTypeName(course.id_type) }}</span>
-            </div>
+        <div class="icon-container">
+          <img :src="course.url_icon" alt="Icon" class="icon">
+        </div>
+        <div class="content">
+          <h2>{{ course.name }}</h2>
+          <div class="details">
+            <span class="course-type">{{ getTariffName(course.id_tariff) }}</span>
+            <span class="tariff-type">{{ getTypeName(course.id_direction) }}</span>
           </div>
         </div>
       </div>
-      <div class="tariff-filter">
-        <h2 class="tariff-title">Тариф</h2>
-        <div class="tariff-options">
-          <label v-for="tariff in tariffs" :key="tariff.id" class="tariff-option">
-            <input type="checkbox" :value="tariff.id" v-model="selectedTariffs">
-            {{ tariff.name }}
-          </label>
-        </div>
+    </div>
+    <div class="tariff-filter">
+      <h2 class="tariff-title">Тариф</h2>
+      <div class="tariff-options">
+        <label v-for="tariff in sortedTariffs" :key="tariff.id" class="tariff-option">
+          <input type="checkbox" :value="tariff.id" v-model="selectedTariffs">
+          {{ tariff.name }}
+        </label>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
 <script>
 import supabase from '@/supabase';
 
+
 export default {
   data() {
     return {
       courses: [],
-      types: [],
+      directions: [],
       tariffs: [],
       currentTypeFilter: null,
       selectedTariffs: [],
+      featuredCourse: null,
+      randomPer: 25
     };
+  },
+  props:{
+    check: Boolean
   },
   computed: {
     filteredCourses() {
       let filtered = this.courses;
 
       if (this.currentTypeFilter !== null) {
-        filtered = filtered.filter(course => course.id_type === this.currentTypeFilter);
+        filtered = filtered.filter(course => course.id_direction === this.currentTypeFilter);
       }
 
       if (this.selectedTariffs.length > 0) {
         filtered = filtered.filter(course => this.selectedTariffs.includes(course.id_tariff));
       }
 
+      this.courses.sort((a, b) => a.id - b.id);
       return filtered;
     },
+    sortedTariffs() {
+      return this.tariffs.sort((a, b) => a.id - b.id);
+    }
   },
   created() {
     this.fetchData();
@@ -82,44 +97,45 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const { data: coursesData, error: coursesError } = await supabase.from('Courses').select('*');
+        const { data: coursesData, error: coursesError } = await supabase.from('courses').select('*');
         if (coursesError) throw coursesError;
 
-        const { data: typesData, error: typesError } = await supabase.from('Types').select('*');
-        if (typesError) throw typesError;
+        const { data: directionsData, error: directionsError } = await supabase.from('direction').select('*');
+        if (directionsError) throw directionsError;
 
-        const { data: tariffsData, error: tariffsError } = await supabase.from('Tariff').select('*');
+        const { data: tariffsData, error: tariffsError } = await supabase.from('tariff').select('*');
         if (tariffsError) throw tariffsError;
 
-        const { data: iconsData, error: iconsError } = await supabase.from('icons').select('*');
-        if (iconsError) throw iconsError;
+        this.courses = coursesData.map(course => ({
+          id: course.id,
+          name: course.name,
+          description: course.description,
+          id_tariff: course.id_tariff,
+          id_direction: course.id_direction,
+          color: course.background,
+          url_icon: course.url_icon
+        }));
 
-        this.courses = coursesData.map(course => {
-          const icon = iconsData.find(icon => icon.id === course.id_icons);
-          return {
-            ...course,
-            icon_url: icon ? icon.url : ''
-          };
-        });
+        this.featuredCourse = this.courses.length > 0 ? this.courses[0] : null;
 
-        this.types = typesData;
+        this.directions = directionsData;
         this.tariffs = tariffsData;
       } catch (error) {
-        console.error('Error fetching data:', error.message);
+        console.error('Ошибка при загрузке данных:', error.message);
       }
     },
-    applyTypeFilter(typeId) {
-      this.currentTypeFilter = typeId;
+    applyTypeFilter(directionId) {
+      this.currentTypeFilter = directionId;
     },
-    getTypeName(typeId) {
-      const type = this.types.find(t => t.id === typeId);
-      return type ? type.type : '';
+    getTypeName(directionId) {
+      const direction = this.directions.find(d => d.id === directionId);
+      return direction ? direction.name : '';
     },
     getTariffName(tariffId) {
       const tariff = this.tariffs.find(t => t.id === tariffId);
       return tariff ? tariff.name : '';
     },
-  },
+  }
 };
 </script>
 
@@ -181,12 +197,22 @@ export default {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   box-sizing: border-box;
+  cursor: pointer;
+}
+
+.icon-container {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .icon {
   width: 48px;
   height: 48px;
-  margin-bottom: 20px;
+  object-fit: contain;
 }
 
 .title {
@@ -216,11 +242,10 @@ export default {
 
 .course-type {
   font-size: 16px;
-
   color: #000000;
 }
 
-.tariff-type{
+.tariff-type {
   color: #78258D;
 }
 
@@ -242,19 +267,9 @@ export default {
 
 .tariff-option {
   font-size: 16px;
-
 }
 
-@media (max-width: 1200px) {
-  .course-block {
-    flex: 1 1 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
 
-  .tariff-filter {
-    margin-left: 0;
-  }
-}
 
 @media (max-width: 768px) {
   .course-block {

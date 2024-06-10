@@ -6,13 +6,13 @@
     </div>
     <div class="slider-container">
       <div class="slider" ref="slider">
-        <div class="data-block" v-for="item in items" :key="item.id" :style="{ backgroundColor: item.back_color }">
-          <img :src="item.icon_url" alt="Icon" class="icon">
+        <div class="data-block" v-for="item in items" :key="item.id" :style="{ backgroundColor: item.background }" @click="selectCourse(item.id)">
+          <img :src="item.url_icon" alt="Icon" class="icon">
           <div class="content">
-            <h2>{{ item.title }}</h2>
+            <h2>{{ item.name }}</h2>
             <div class="details">
               <span class="course-tariff">{{ getTariffName(item.id_tariff) }}</span>
-              <span class="course-type">{{ getTypeName(item.id_type) }}</span>
+              <span class="course-type">{{ getDirectionName(item.id_direction) }}</span>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@ export default {
       items: [],
       currentIndex: 0,
       tariffs: [],
-      types: [],
+      directions: [],
     };
   },
   created() {
@@ -47,48 +47,44 @@ export default {
   },
   methods: {
     async fetchData() {
-      const { data: courses, error: coursesError } = await supabase.from('Courses').select('*');
+      const { data: courses, error: coursesError } = await supabase.from('courses').select('*');
+      console.log('Courses:', courses);
       if (coursesError) {
         console.error('Error fetching courses:', coursesError.message);
         return;
       }
 
-      const { data: icons, error: iconsError } = await supabase.from('icons').select('*');
-      if (iconsError) {
-        console.error('Error fetching icons:', iconsError.message);
-        return;
-      }
-
-      const { data: tariffs, error: tariffsError } = await supabase.from('Tariff').select('*');
+      const { data: tariffs, error: tariffsError } = await supabase.from('tariff').select('*');
+      console.log('Tariffs:', tariffs);
       if (tariffsError) {
         console.error('Error fetching tariffs:', tariffsError.message);
         return;
       }
 
-      const { data: types, error: typesError } = await supabase.from('Types').select('*');
-      if (typesError) {
-        console.error('Error fetching types:', typesError.message);
+      const { data: directions, error: directionsError } = await supabase.from('direction').select('*');
+      console.log('Directions:', directions);
+      if (directionsError) {
+        console.error('Error fetching directions:', directionsError.message);
         return;
       }
 
       this.tariffs = tariffs;
-      this.types = types;
+      this.directions = directions;
 
       this.items = courses.map(course => {
-        const icon = icons.find(icon => icon.id === course.id_icons);
         return {
           ...course,
-          icon_url: icon ? icon.url : ''
         };
       }).slice(0, 3);
     },
+
     getTariffName(tariffId) {
       const tariff = this.tariffs.find(t => t.id === tariffId);
       return tariff ? tariff.name : '';
     },
-    getTypeName(typeId) {
-      const type = this.types.find(t => t.id === typeId);
-      return type ? type.type : '';
+    getDirectionName(directionId) {
+      const direction = this.directions.find(d => d.id === directionId);
+      return direction ? direction.name : '';
     },
     goToAllCourses() {
       this.$router.push({ name: 'courses' });
@@ -98,6 +94,9 @@ export default {
       const offset = index * this.$refs.slider.clientWidth;
       this.$refs.slider.scrollLeft = offset;
     },
+    selectCourse(id) {
+      this.$router.push({ name: 'CoursesInfo', params: { id: id } });
+    }
   },
 };
 </script>
