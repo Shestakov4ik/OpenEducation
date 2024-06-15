@@ -9,7 +9,7 @@
           <div class="courses">{{ plan.count_course }} курсов</div>
           <div class="tasks">{{ plan.count_task }} заданий</div>
         </div>
-        <button class="try-button" :style="{ backgroundColor: plan.color }">Попробовать</button>
+        <button class="try-button"   :style="{ backgroundColor: plan.color+'95'}">Попробовать</button>
       </div>
     </div>
   </div>
@@ -81,27 +81,27 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 20px 40px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 300px;
+  width: 450px;
   box-sizing: border-box;
 }
 
 .plan-title {
   font-size: 18px;
   color: white;
-  padding: 10px;
+  padding: 4px 10px;
   border-radius: 100px;
-  width: 50%;
+  width: 33%;
   text-align: center;
   margin-bottom: 30px;
-  font-family: Gilroy-Bold;
+  font-family: Gilroy-Light, sans-serif;
 }
 
 .plan-details {
   font-size: 18px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
 }
 
 .price, .courses, .tasks {
@@ -115,13 +115,15 @@ export default {
 .try-button {
   width: 144px;
   height: 34px;
-  padding: 10px 20px;
-  color: white;
+  padding: 5px 20px;
+  color: #000000;
   border: none;
-  margin-top: 16px;
-  font-family: Gilroy-Light;
-
+  font-family: Gilroy-Light, sans-serif, sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.5px;
   border-radius: 4px;
   cursor: pointer;
+
+
 }
 </style>

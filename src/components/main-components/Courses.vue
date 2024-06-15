@@ -4,6 +4,7 @@
       <CoursesAll @openInfo = "open"/>
     </div>
     <div class="info" v-if="courseId" >
+
       <div class="shadow" @click="close"></div>
       <div class="sidebar">
         <CoursesInfo @closeInfo="close" :id="this.courseId"/>
@@ -36,18 +37,26 @@ export default {
     open(id){
       this.courseId=id
       console.log("ID курса:", id);
+      document.querySelector("body").style.overflowY="hidden";
+
     },
     close(id) {
       console.log(id);
       this.courseId = null;
+      document.querySelector("body").style.overflowY="scroll";
+
+    },
+    hide(){
+
     }
   },
 }
 </script>
 
 <style scoped>
-.container {
-
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
 .banner-wrapper {
@@ -68,19 +77,21 @@ export default {
   cursor: pointer;
 }
 
+
+
 .sidebar {
   background: #fff;
   width: 45%;
   height: 100%;
-  position: absolute;
   right: -45%;
   opacity: 0;
+  overflow-y: scroll;
   transition: right 2s ease, opacity 2s ease;
 }
 
 .info {
   display: flex;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
@@ -97,5 +108,6 @@ export default {
   right: 0;
   opacity: 1;
 }
+
 
 </style>

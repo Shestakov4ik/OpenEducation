@@ -113,6 +113,7 @@ export default {
   padding: 10px 20px;
   background-color: white;
   color: #78258D;
+  font-family: 'Gilroy-Light', sans-serif;
   border: 2px solid #78258D;
   border-radius: 8px;
   cursor: pointer;

@@ -165,6 +165,7 @@ export default {
   background-color: white;
   color: black;
   cursor: pointer;
+  font-family: 'Gilroy-Light', sans-serif;
 }
 
 .filter-button.active {

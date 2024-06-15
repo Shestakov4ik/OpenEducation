@@ -127,6 +127,7 @@ export default {
   color: #78258D;
   border: 2px solid #78258D;
   border-radius: 8px;
+  font-family: 'Gilroy-Light', sans-serif;
   cursor: pointer;
 }
 

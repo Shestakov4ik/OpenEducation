@@ -11,6 +11,8 @@
   </div>
 </template>
 
+//align-self: flex-end;
+
 <script>
 export default {
   data() {

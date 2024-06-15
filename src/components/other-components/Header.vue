@@ -32,6 +32,11 @@ export default {
   font-family: 'Gilroy-Bold';
   src: url("../../assets/fonts/gilroy-bold.ttf") format('opentype');
 }
+@font-face {
+  font-family: 'Gilroy-Regular';
+  src: url("../../assets/fonts/gilroy-regular.ttf") format('opentype');
+}
+
 
 .selected {
   color: #78258D !important;

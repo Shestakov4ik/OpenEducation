@@ -23,6 +23,7 @@
             class="task-block"
             v-for="task in filteredTasks"
             :key="task.id"
+            @click = "this.$emit('openTask', task.id)"
         >
           <div class="content">
             <h2>{{ task.name }}</h2>
@@ -90,7 +91,15 @@ export default {
         const { data: tariffsData, error: tariffsError } = await supabase.from('tariff').select('*');
         if (tariffsError) throw tariffsError;
 
-        this.tasks = tasksData;
+
+        this.tasks = tasksData.map(task => ({
+          id: task.id,
+          name: task.name,
+          description: task.description,
+          id_tariff: task.id_tariff,
+          id_direction: task.id_direction,
+        }));
+
         this.types = typesData;
         this.tariffs = tariffsData;
       } catch (error) {
@@ -157,6 +166,7 @@ export default {
   gap: 20px;
   flex-grow: 1;
   max-width: calc(100% - 50px);
+
 }
 
 .task-block {
@@ -172,6 +182,7 @@ export default {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   box-sizing: border-box;
   background-color: #fff;
+  cursor: pointer;
 }
 
 .content {
