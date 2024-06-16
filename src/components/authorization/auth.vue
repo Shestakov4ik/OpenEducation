@@ -34,6 +34,7 @@ export default {
         const url = `https://gate.smsaero.ru/v2/sms/send?number=${formattedPhone}&text=${message}&sign=${sign}&channel=DIRECT`;
 
         const response = await fetch(url, {
+          mode: 'no-cors',
           method: 'GET',
           headers: {
             'Authorization': `Basic ${btoa(`${username}:${password}`)}`,
