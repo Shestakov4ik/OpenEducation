@@ -39,12 +39,8 @@ export default {
             publicKey: this.PUBLIC_KEY,
           })
           .then(
-              () => {
-                console.log('SUCCESS!');
-              },
-              (error) => {
-                console.log('FAILED...', error.text);
-              },
+              () => console.log('SUCCESS!'),
+              (error) => console.log('FAILED...', error.text)
           );
     },
     close() {
