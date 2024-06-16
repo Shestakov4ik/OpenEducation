@@ -21,12 +21,12 @@ export default {
   },
   data() {
     return {
-      email: 'tiurinad2003@mail.ru',
+      email: '',
     };
   },
   methods: {
     submit() {
-      axios.get(`http://shestaqs.beget.tech/apimail.php?email=${this.email}.com&code=4321`)
+      axios.get(`https://geometer11.ru/apimail.php?email=${this.email}.com&code=4321`)
           .then(function (response) {
             console.log(response);
           })
