@@ -21,12 +21,19 @@ export default {
   },
   data() {
     return {
-      email: '',
+      email: 'tiurinad',
     };
   },
   methods: {
     submit() {
-      axios.get(`https://geometer11.ru/apimail.php?email=${this.email}.com&code=4321`)
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        }
+      }
+      axios.get(`https://geometer11.ru/apimail.php?email=${this.email}.com&code=4321`, config)
           .then(function (response) {
             console.log(response);
           })
