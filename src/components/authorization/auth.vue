@@ -1,12 +1,15 @@
 <template>
   <div class="auth-modal">
     <div class="auth-container">
-      <h1 class="auth-title">Вход в кабинет</h1>
-      <p class="auth-description">На указанную почту придёт СМС с кодом подтверждения</p>
-      <label class="auth-label">Электронная почта</label>
-      <input v-model="email" class="auth-input" placeholder="example@mail.com">
-      <button class="auth-button" @click="submit">Продолжить</button>
-      <button class="auth-close" @click="close">Закрыть</button>
+      <form ref="form" @submit.prevent="sendEmail">
+        <h1 class="auth-title">Вход в кабинет</h1>
+        <p class="auth-description">На указанную почту придёт СМС с кодом подтверждения</p>
+        <label class="auth-label">Электронная почта</label>
+        <input v-model="email" type="email" name="email" class="auth-input" placeholder="example@mail.com">
+        <input v-model="code" type="number" name="code" style="display: none;">
+        <button class="auth-button" type="submit" @click="submit">Продолжить</button>
+        <button class="auth-close" @click="close">Закрыть</button>
+      </form>
     </div>
   </div>
 </template>
@@ -14,39 +17,42 @@
 //align-self: flex-end;
 
 <script>
-import axios from "axios";
+import emailjs from '@emailjs/browser';
+
 export default {
   components: {
-    axios,
+    emailjs,
   },
   data() {
     return {
-      email: 'tiurinad',
+      email: '',
+      code: this.getRandomInt(9999),
+      SERVICE_ID: 'service_h9thmof',
+      TEMPLATE_ID: 'template_hnilla1',
+      PUBLIC_KEY: 'wiKXGL1xjXwRni4xB',
     };
   },
   methods: {
     submit() {
-      const config = {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-        }
-      }
-      axios.get(`https://geometer11.ru/apimail.php?email=${this.email}.com&code=4321`, config)
-          .then(function (response) {
-            console.log(response);
+      emailjs
+          .sendForm(this.SERVICE_ID, this.TEMPLATE_ID, this.$refs.form, {
+            publicKey: this.PUBLIC_KEY,
           })
-          .catch(function (error) {
-            console.log(error);
-          })
-          .then(function () {
-            console.log('Запрос выполнен')
-          });
+          .then(
+              () => {
+                console.log('SUCCESS!');
+              },
+              (error) => {
+                console.log('FAILED...', error.text);
+              },
+          );
     },
     close() {
       this.$emit('close');
       this.$router.back();
+    },
+    getRandomInt(max) {
+      return Math.floor(Math.random() * max);
     }
   },
 };
