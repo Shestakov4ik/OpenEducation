@@ -1,0 +1,10 @@
+[[redirects]]
+from = "/pathx"
+to = "https://geometer11.ru/apimail.php"
+status = 200
+force = true
+headers = {X-From = "Netlify"}
+[[headers]]
+for = "/*"
+[headers.values]
+Access-Control-Allow-Origin = "*"
