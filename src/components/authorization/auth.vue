@@ -2,9 +2,9 @@
   <div class="auth-modal">
     <div class="auth-container">
       <h1 class="auth-title">Вход в кабинет</h1>
-      <p class="auth-description">На указанный номер придёт СМС с кодом подтверждения</p>
-      <label class="auth-label">Телефон</label>
-      <input v-model="phone" class="auth-input" v-mask="'+7 (###) ###-##-##'" placeholder="+7 (___) ___-__-__">
+      <p class="auth-description">На указанную почту придёт СМС с кодом подтверждения</p>
+      <label class="auth-label">Электронная почта</label>
+      <input v-model="email" class="auth-input" placeholder="example@mail.com">
       <button class="auth-button" @click="submit">Продолжить</button>
       <button class="auth-close" @click="close">Закрыть</button>
     </div>
@@ -14,54 +14,28 @@
 //align-self: flex-end;
 
 <script>
+import axios from "axios";
 export default {
+  components: {
+    axios,
+  },
   data() {
     return {
-      phone: '',
+      email: 'tiurinad2003@mail.ru',
     };
   },
   methods: {
-    async submit() {
-      const formattedPhone = this.phone.replace(/\D/g, '');
-      console.log('Formatted Phone:', formattedPhone);
-
-      if (formattedPhone.length === 11) {
-        const username = 'shestakov4ij@mail.ru';
-        const password = 'y7Vi-PDb2uENSJPtaz0Gv7NYVPkQKb2M';
-        const sign = 'SMS Aero';
-        const message = 'Ваш код подтверждения: 1234';
-
-        const url = `https://gate.smsaero.ru/v2/sms/send?number=${formattedPhone}&text=${message}&sign=${sign}&channel=DIRECT`;
-
-        const response = await fetch(url, {
-          mode: 'no-cors',
-          method: 'GET',
-          headers: {
-            'Authorization': `Basic ${btoa(`${username}:${password}`)}`,
-            'Content-Type': 'application/json'
-          }
-        });
-
-        console.log('HTTP Response Status:', response.status);
-
-        if (!response.ok) {
-          const errorText = await response.text();
-          console.error('HTTP Error Response Text:', errorText);
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log('Response Data:', data);
-
-        if (data.success) {
-          alert('СМС с кодом подтверждения отправлено!');
-        } else {
-          console.error('Ошибка при отправке СМС:', data.message);
-          alert('Произошла ошибка при отправке СМС. Пожалуйста, попробуйте еще раз.');
-        }
-      } else {
-        alert('Пожалуйста, введите корректный номер телефона.');
-      }
+    submit() {
+      axios.get(`http://shestaqs.beget.tech/apimail.php?email=${this.email}.com&code=4321`)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+          .then(function () {
+            console.log('Запрос выполнен')
+          });
     },
     close() {
       this.$emit('close');
