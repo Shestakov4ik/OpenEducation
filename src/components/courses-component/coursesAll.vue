@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="courses-container">
     <h1 class="title">Курсы</h1>
     <div class="filters">
@@ -182,6 +182,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  margin-right: 40px;
   flex-grow: 1;
   max-width: calc(100% - 50px);
 }
