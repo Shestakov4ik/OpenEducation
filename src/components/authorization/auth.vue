@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       email: '',
-      code: this.getRandomInt(9999),
+      code: this.getRandomInt(1000, 9999),
       SERVICE_ID: 'service_h9thmof',
       TEMPLATE_ID: 'template_hnilla1',
       PUBLIC_KEY: 'wiKXGL1xjXwRni4xB',
@@ -47,8 +47,10 @@ export default {
       this.$emit('close');
       this.$router.back();
     },
-    getRandomInt(max) {
-      return Math.floor(Math.random() * max);
+    getRandomInt(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min);
     }
   },
 };
