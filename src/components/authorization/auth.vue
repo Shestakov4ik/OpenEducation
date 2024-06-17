@@ -7,8 +7,10 @@
         <label class="auth-label">Электронная почта</label>
         <input v-model="email" type="email" name="email" class="auth-input" placeholder="example@mail.com">
         <input v-model="code" type="number" name="code" style="display: none;">
-        <button class="deactive-btn" type="submit" @click="submit">Продолжить</button>
-        <button class="active-btn" @click="close">Закрыть</button>
+        <div class="btn">
+          <button class="deactive-btn" type="submit" @click="submit">Продолжить</button>
+          <button class="active-btn" @click="close">Закрыть</button>
+        </div>
       </form>
     </div>
   </div>
@@ -126,8 +128,7 @@ export default {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
-  font-family: 'Gilroy-Light';
+  font-family: 'Gilroy-Light', sans-serif;
 }
 
 .deactive-btn {
@@ -139,7 +140,12 @@ export default {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
-  font-family: Gilroy-Light;
+  font-family: Gilroy-Light, sans-serif;
+}
+
+.btn{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 </style>
