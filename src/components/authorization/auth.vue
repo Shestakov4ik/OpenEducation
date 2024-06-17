@@ -56,7 +56,7 @@ export default {
       pin3: '',
       pin4: '',
       allPin: null,
-      test: app.config.globalProperties.$auth
+      test: false
 
     };
   },
@@ -107,8 +107,9 @@ export default {
     confirm() {
       if (this.code===this.allPin){
         console.log("WORKED")
-
-
+        fetch("global.json")
+            .then(response => response.json())
+            .then(data => (this.test = data));
         console.log(this.test)
 
 
