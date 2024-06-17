@@ -1,6 +1,7 @@
 <template>
   <div class="auth-modal">
     <div v-if="check===true" class="auth-container">
+      <form ref="form" @submit.prevent="sendEmail">
         <h1 class="auth-title">Вход в кабинет</h1>
         <p class="auth-description">На указанную почту придёт СМС с кодом подтверждения</p>
         <label class="auth-label">Электронная почта</label>
@@ -14,8 +15,9 @@
           <button id="authBtn" class="deactive-btn" type="submit" @click="submit">Продолжить</button>
           <button class="active-btn" @click="close">Закрыть</button>
         </div>
+      </form>
     </div>
-    <div v-else class="verification-modal" v-show="visible">
+    <div v-else class="verification-modal">
       <div class="verification-container">
         <h1 class="verification-title">Введите код</h1>
         <p class="verification-description">Отправлено СМС на номер {{ phone }}</p>
