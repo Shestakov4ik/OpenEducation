@@ -37,7 +37,7 @@
 
 <script>
 import emailjs from '@emailjs/browser';
-import {app} from "cli";
+import app from "@/Main.vue";
 
 export default {
   components: {
@@ -106,6 +106,7 @@ export default {
     confirm() {
       if (this.code===this.allPin){
         console.log("WORKED")
+
 
         console.log(app.config.globalProperties.auth)
         app.config.globalProperties.auth = true
