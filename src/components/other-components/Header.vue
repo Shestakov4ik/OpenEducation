@@ -9,13 +9,17 @@
       <router-link to="/tasks" exact-active-class="selected">Все задания</router-link>
       <router-link to="/contacts" exact-active-class="selected">Контакты</router-link>
     </nav>
-    <a id="auth" @click="$emit('change-page', 'auth')">Войти</a>
+    <router-link to="/cabinet" class="auth" v-if="auth">Личный кабинет</router-link>
+    <a class="auth" v-else @click="$emit('change-page', 'auth')">Войти</a>
   </header>
 </template>
 
 <script>
 export default {
   name: 'Header',
+  props: {
+    auth: Boolean
+  },
 };
 </script>
 
@@ -65,7 +69,7 @@ export default {
   color: #333333;
   cursor: pointer;
 }
-#auth {
+.auth {
   padding: 14px 30px;
   background-color: #78258D;
   color: white;

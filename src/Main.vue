@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header class="header" @change-page="PageChange"/>
+    <Header class="header" :auth="auth" @change-page="PageChange"/>
     <router-view/>
     <Auth v-if="authOpened" @close="closeAuth" @auth="logIn"/>
 
@@ -34,6 +34,7 @@ export default {
       auth: false
     }
   },
+
   methods:{
     logIn(auth){
       this.auth=auth
@@ -48,7 +49,7 @@ export default {
     const PageChange = (page) => {
       if (page === 'auth') {
         authOpened.value = true;
-      } else if (page === 'verification') {
+      } else if (page === 'cabinet') {
         verOpened.value = true;
       } else{
         authOpened.value = false;

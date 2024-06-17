@@ -6,6 +6,7 @@ import Contacts from './components/main-components/Contacts.vue';
 import Auth from './components/authorization/auth.vue';
 import Verification from './components/authorization/verification.vue';
 import CoursesInfo from "@/components/course-info/CoursesInfo.vue";
+import Cabinet from "@/components/cabinet/main-cab.vue";
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -15,6 +16,7 @@ const routes = [
     { path: '/auth', name: 'Auth', component: Auth },
     { path: '/verification/:phone', name: 'Verification', component: Verification },
     { path: '/courseinfo:id', name: 'courseinfo', component: CoursesInfo },
+    { path: '/cabinet', name: 'cabinet', component: Cabinet },
 
 ];
 
