@@ -47,7 +47,7 @@ export default {
     const PageChange = (page) => {
       if (page === 'auth') {
         authOpened.value = true;
-      } else if (page === 'cabinet') {
+      } else if (page === 'verification') {
         verOpened.value = true;
       } else{
         authOpened.value = false;
