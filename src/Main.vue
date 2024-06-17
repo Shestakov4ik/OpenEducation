@@ -1,9 +1,13 @@
 <template>
   <div>
-    <Header v-if="this.$route.name !== 'cabinet'" class="header" :auth="auth" @change-page="PageChange"/>
+    <Header v-if="this.Check"
+            class="header"
+            :auth="auth"
+            @checK="check"
+            @change-page="PageChange"/>
     <router-view/>
     <Auth v-if="authOpened" @close="closeAuth" @auth="logIn"/>
-    <Footer v-if="this.$route.name === 'cabinet'" class="footer"/>
+    <Footer v-if="this.Check"  class="footer"/>
   </div>
 </template>
 
@@ -29,11 +33,15 @@ export default {
   },
   data(){
     return{
-      auth: false
+      auth: false,
+      Check:true
     }
   },
 
   methods:{
+    check(value){
+      this.Check=value
+    },
     logIn(auth){
       this.auth=auth
       console.log(this.auth)
