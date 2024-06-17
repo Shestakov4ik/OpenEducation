@@ -97,13 +97,13 @@ export default {
       }
     },
     submitt() {
-      this.allPin = this.pin1 + this.pin2 + this.pin3 + this.pin4;
+      this.allPin = Number(this.pin1 + this.pin2 + this.pin3 + this.pin4);
       console.log('Submitted PIN:', this.allPin);
 
     },
     confirm() {
       if (this.code===this.allPin){
-
+        console.log("WORKED")
       }
     },
     changeNumber() {
