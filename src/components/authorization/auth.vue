@@ -7,14 +7,13 @@
         <label class="auth-label">Электронная почта</label>
         <input v-model="email" type="email" name="email" class="auth-input" placeholder="example@mail.com">
         <input v-model="code" type="number" name="code" style="display: none;">
-        <button class="auth-button" type="submit" @click="submit">Продолжить</button>
-        <button class="auth-close" @click="close">Закрыть</button>
+        <button class="deactive-btn" type="submit" @click="submit">Продолжить</button>
+        <button class="active-btn" @click="close">Закрыть</button>
       </form>
     </div>
   </div>
 </template>
 
-//align-self: flex-end;
 
 <script>
 import emailjs from '@emailjs/browser';
@@ -25,7 +24,7 @@ export default {
   },
   data() {
     return {
-      email: '',
+      email: null,
       code: this.getRandomInt(1000, 9999),
       SERVICE_ID: 'service_h9thmof',
       TEMPLATE_ID: 'template_hnilla1',
@@ -34,14 +33,21 @@ export default {
   },
   methods: {
     submit() {
-      emailjs
-          .sendForm(this.SERVICE_ID, this.TEMPLATE_ID, this.$refs.form, {
-            publicKey: this.PUBLIC_KEY,
-          })
-          .then(
-              () => console.log('SUCCESS!'),
-              (error) => console.log('FAILED...', error.text)
-          );
+      if (this.email!=null){
+        emailjs
+            .sendForm(this.SERVICE_ID, this.TEMPLATE_ID, this.$refs.form, {
+              publicKey: this.PUBLIC_KEY,
+            })
+            .then(
+                () => console.log('SUCCESS!'),
+                (error) => console.log('FAILED...', error.text)
+            );
+
+
+      } else {
+        alert("Введите email!")
+      }
+
     },
     close() {
       this.$emit('close');
@@ -111,7 +117,7 @@ export default {
   font-family: Gilroy-Light;
 }
 
-.auth-button {
+.active-btn {
   width: 100%;
   height: 60px;
   background-color: #78258D;
@@ -124,7 +130,7 @@ export default {
   font-family: 'Gilroy-Light';
 }
 
-.auth-close {
+.deactive-btn {
   width: 100%;
   height: 60px;
   background-color: #ccc;
