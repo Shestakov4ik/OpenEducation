@@ -56,6 +56,7 @@ export default {
       pin3: '',
       pin4: '',
       allPin: null,
+      test: app.config.globalProperties.$auth
 
     };
   },
@@ -108,9 +109,8 @@ export default {
         console.log("WORKED")
 
 
-        console.log(app.config.globalProperties.$auth)
-        app.config.globalProperties.$auth = true
-        console.log(app.config.globalProperties.$auth)
+        console.log(this.test)
+
 
       }else {
         alert("Коды не совпадают!")
