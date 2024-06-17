@@ -5,7 +5,11 @@
         <h1 class="auth-title">Вход в кабинет</h1>
         <p class="auth-description">На указанную почту придёт СМС с кодом подтверждения</p>
         <label class="auth-label">Электронная почта</label>
-        <input v-model="email" type="email" name="email" class="auth-input" placeholder="example@mail.com">
+        <input v-model="email" type="email"
+               name="email"
+               class="auth-input"
+               @input="activeBtn"
+               placeholder="example@mail.com">
         <input v-model="code" type="number" name="code" style="display: none;">
         <div class="btn">
           <button id="authBtn" class="deactive-btn" type="submit" @click="submit">Продолжить</button>
@@ -44,8 +48,7 @@ export default {
                 () => console.log('SUCCESS!'),
                 (error) => console.log('FAILED...', error.text)
             );
-        document.querySelector('#authBtn').classList.remove('deactive-btn');
-        document.querySelector('#authBtn').classList.add('active-btn');
+
 
 
       } else {
@@ -61,6 +64,10 @@ export default {
       min = Math.ceil(min);
       max = Math.floor(max);
       return Math.floor(Math.random() * (max - min) + min);
+    },
+    activeBtn(){
+      document.querySelector('#authBtn').classList.remove('deactive-btn');
+      document.querySelector('#authBtn').classList.add('active-btn');
     }
   },
 };
