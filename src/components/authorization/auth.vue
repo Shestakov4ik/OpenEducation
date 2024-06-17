@@ -26,7 +26,7 @@
           <input v-model="pin1" class="pin-input" maxlength="1" @input="focusNext($event, 1)">
           <input v-model="pin2" class="pin-input" maxlength="1" @input="focusNext($event, 2)">
           <input v-model="pin3" class="pin-input" maxlength="1" @input="focusNext($event, 3)">
-          <input v-model="pin4" class="pin-input" maxlength="1" @input="submit">
+          <input v-model="pin4" class="pin-input" maxlength="1" @input="submitt">
         </div>
         <button class="resend-sms" @click="resendSMS">Отправить СМС еще раз</button>
       </div>
@@ -88,6 +88,24 @@ export default {
     activeBtn(){
       document.querySelector('#authBtn').classList.remove('deactive-btn');
       document.querySelector('#authBtn').classList.add('active-btn');
+    },
+    focusNext(event, index) {
+      const inputLength = event.target.value.length;
+      if (inputLength === 1 && index < 4) {
+        this.$refs[`pin${index + 1}`].focus();
+      }
+    },
+    submitt() {
+      const pin = this.pin1 + this.pin2 + this.pin3 + this.pin4;
+      console.log('Submitted PIN:', pin);
+
+    },
+    resendSMS() {
+
+      alert('СМС с кодом подтверждения отправлено!');
+    },
+    changeNumber() {
+      this.$emit('change-number');
     }
   },
 };
