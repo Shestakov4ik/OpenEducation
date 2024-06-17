@@ -20,7 +20,7 @@
     <div v-else class="verification-modal">
       <div class="verification-container">
         <h1 class="verification-title">Введите код</h1>
-        <p class="verification-description">Код на вашу почту {{ email }}</p>
+        <p class="verification-description">Код отправлен на вашу почту {{ email }}</p>
         <button class="verification-change" @click="changeNumber">Изменить</button>
         <div class="pin-inputs">
           <input v-model="pin1" ref="pin1" class="pin-input" maxlength="1" @input="focusNext($event, 1)">
@@ -108,9 +108,9 @@ export default {
         console.log("WORKED")
 
 
-        console.log(app.config.globalProperties.auth)
-        app.config.globalProperties.auth = true
-        console.log(app.config.globalProperties.auth)
+        console.log(app.config.globalProperties.$auth)
+        app.config.globalProperties.$auth = true
+        console.log(app.config.globalProperties.$auth)
 
       }else {
         alert("Коды не совпадают!")
