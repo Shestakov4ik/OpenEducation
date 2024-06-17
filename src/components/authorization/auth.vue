@@ -23,10 +23,10 @@
         <p class="verification-description">Отправлено СМС на номер {{ phone }}</p>
         <button class="verification-change" @click="changeNumber">Изменить</button>
         <div class="pin-inputs">
-          <input v-model="pin1" class="pin-input" maxlength="1" @input="focusNext($event, 1)">
-          <input v-model="pin2" class="pin-input" maxlength="1" @input="focusNext($event, 2)">
-          <input v-model="pin3" class="pin-input" maxlength="1" @input="focusNext($event, 3)">
-          <input v-model="pin4" class="pin-input" maxlength="1" @input="submitt">
+          <input v-model="pin1" ref="pin1" class="pin-input" maxlength="1" @input="focusNext($event, 1)">
+          <input v-model="pin2" ref="pin2" class="pin-input" maxlength="1" @input="focusNext($event, 2)">
+          <input v-model="pin3" ref="pin3" class="pin-input" maxlength="1" @input="focusNext($event, 3)">
+          <input v-model="pin4" ref="pin4" class="pin-input" maxlength="1" @input="submitt">
         </div>
         <button class="resend-sms" @click="resendSMS">Отправить СМС еще раз</button>
       </div>
@@ -101,11 +101,17 @@ export default {
 
     },
     resendSMS() {
-
-      alert('СМС с кодом подтверждения отправлено!');
+      emailjs
+          .sendForm(this.SERVICE_ID, this.TEMPLATE_ID, this.$refs.form, {
+            publicKey: this.PUBLIC_KEY,
+          })
+          .then(
+              () => console.log('SUCCESS!'),
+              (error) => console.log('FAILED...', error.text)
+          );
     },
     changeNumber() {
-      this.$emit('change-number');
+      this.check = true
     }
   },
 };
