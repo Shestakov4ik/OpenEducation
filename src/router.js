@@ -14,7 +14,7 @@ const routes = [
     { path: '/tasks', name: 'tasks', component: Tasks },
     { path: '/contacts', name: 'Contacts', component: Contacts },
     { path: '/auth', name: 'Auth', component: Auth },
-    { path: '/verification/:phone', name: 'Verification', component: Verification },
+    { path: '/verification', name: 'Verification', component: Verification },
     { path: '/courseinfo:id', name: 'courseinfo', component: CoursesInfo },
     { path: '/cabinet', name: 'cabinet', component: Cabinet },
 
