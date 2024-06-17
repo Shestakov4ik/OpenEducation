@@ -1,6 +1,6 @@
 <template>
   <div class="auth-modal">
-    <div v-if="check=true" class="auth-container">
+    <div v-if="check===true" class="auth-container">
         <h1 class="auth-title">Вход в кабинет</h1>
         <p class="auth-description">На указанную почту придёт СМС с кодом подтверждения</p>
         <label class="auth-label">Электронная почта</label>
@@ -15,7 +15,7 @@
           <button class="active-btn" @click="close">Закрыть</button>
         </div>
     </div>
-    <div v-else-if="check=false" class="verification-modal" v-show="visible">
+    <div v-else-if="check===false" class="verification-modal" v-show="visible">
       <div class="verification-container">
         <h1 class="verification-title">Введите код</h1>
         <p class="verification-description">Отправлено СМС на номер {{ phone }}</p>
