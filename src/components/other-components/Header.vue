@@ -26,7 +26,6 @@ export default {
   },
   methods:{
     openCab(){
-      console.log(this.$route.name)
       router.push("/cabinet")
     }
   }
