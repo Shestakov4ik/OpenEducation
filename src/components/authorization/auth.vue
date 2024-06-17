@@ -8,7 +8,7 @@
         <input v-model="email" type="email" name="email" class="auth-input" placeholder="example@mail.com">
         <input v-model="code" type="number" name="code" style="display: none;">
         <div class="btn">
-          <button class="deactive-btn" type="submit" @click="submit">Продолжить</button>
+          <button id="authBtn" class="deactive-btn" type="submit" @click="submit">Продолжить</button>
           <button class="active-btn" @click="close">Закрыть</button>
         </div>
       </form>
@@ -44,6 +44,8 @@ export default {
                 () => console.log('SUCCESS!'),
                 (error) => console.log('FAILED...', error.text)
             );
+        document.querySelector('#authBtn').classList.remove('deactive-btn');
+        document.querySelector('#authBtn').classList.add('active-btn');
 
 
       } else {
