@@ -106,6 +106,7 @@ export default {
       if (this.code===this.allPin){
         console.log("WORKED")
         this.$emit('auth', true)
+        this.$router.back();
 
 
       }else {
