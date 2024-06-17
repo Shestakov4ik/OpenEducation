@@ -10,7 +10,7 @@
       <router-link to="/contacts" exact-active-class="selected">Контакты</router-link>
     </nav>
 
-    <a class="auth" v-if="auth" @click="$emit('checK', false); openCab()">Войти</a>
+    <a class="auth" v-if="auth" @click="$emit('checK', false); openCab()">Личный кабинет</a>
     <a class="auth" v-else @click="$emit('change-page', 'auth')">Войти</a>
 
   </header>
@@ -26,6 +26,7 @@ export default {
   },
   methods:{
     openCab(){
+      console.log(this.$route.name)
       router.push("/cabinet")
     }
   }
