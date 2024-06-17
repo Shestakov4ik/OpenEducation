@@ -1,9 +1,9 @@
 <template>
   <div>
-    <Header v-if="auth!==true" class="header" :auth="auth" @change-page="PageChange"/>
+    <Header v-if="this.$route.name === 'cabinet'" class="header" :auth="auth" @change-page="PageChange"/>
     <router-view/>
     <Auth v-if="authOpened" @close="closeAuth" @auth="logIn"/>
-    <Footer v-if="auth!==true" class="footer"/>
+    <Footer v-if="this.$route.name === 'cabinet'" class="footer"/>
   </div>
 </template>
 
