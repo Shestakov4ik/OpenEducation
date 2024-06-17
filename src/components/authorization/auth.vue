@@ -20,7 +20,7 @@
     <div v-else class="verification-modal">
       <div class="verification-container">
         <h1 class="verification-title">Введите код</h1>
-        <p class="verification-description">Отправлено СМС на номер {{ phone }}</p>
+        <p class="verification-description">Код на вашу почту {{ email }}</p>
         <button class="verification-change" @click="changeNumber">Изменить</button>
         <div class="pin-inputs">
           <input v-model="pin1" ref="pin1" class="pin-input" maxlength="1" @input="focusNext($event, 1)">
@@ -28,7 +28,7 @@
           <input v-model="pin3" ref="pin3" class="pin-input" maxlength="1" @input="focusNext($event, 3)">
           <input v-model="pin4" ref="pin4" class="pin-input" maxlength="1" @input="submitt">
         </div>
-        <button class="resend-sms" @click="resendSMS">Отправить СМС еще раз</button>
+        <button class="resend-sms" @click="confirm">Подтвердить</button>
       </div>
     </div>
   </div>
@@ -53,7 +53,8 @@ export default {
       pin1: '',
       pin2: '',
       pin3: '',
-      pin4: ''
+      pin4: '',
+      allPin: null
     };
   },
   methods: {
@@ -96,19 +97,14 @@ export default {
       }
     },
     submitt() {
-      const pin = this.pin1 + this.pin2 + this.pin3 + this.pin4;
-      console.log('Submitted PIN:', pin);
+      this.allPin = this.pin1 + this.pin2 + this.pin3 + this.pin4;
+      console.log('Submitted PIN:', this.allPin);
 
     },
-    resendSMS() {
-      emailjs
-          .sendForm(this.SERVICE_ID, this.TEMPLATE_ID, this.$refs.form, {
-            publicKey: this.PUBLIC_KEY,
-          })
-          .then(
-              () => console.log('SUCCESS!'),
-              (error) => console.log('FAILED...', error.text)
-          );
+    confirm() {
+      if (this.code===this.allPin){
+
+      }
     },
     changeNumber() {
       this.check = true
@@ -220,9 +216,11 @@ export default {
 .verification-container {
   background: white;
   padding: 40px;
+  margin-bottom: 20px;
   border-radius: 8px;
   width: 500px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Gilroy-Light, sans-serif;
 }
 
 .verification-title {
