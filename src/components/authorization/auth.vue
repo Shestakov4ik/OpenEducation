@@ -15,7 +15,7 @@
           <button class="active-btn" @click="close">Закрыть</button>
         </div>
     </div>
-    <div v-else-if="check===false" class="verification-modal" v-show="visible">
+    <div v-else class="verification-modal" v-show="visible">
       <div class="verification-container">
         <h1 class="verification-title">Введите код</h1>
         <p class="verification-description">Отправлено СМС на номер {{ phone }}</p>
@@ -47,7 +47,11 @@ export default {
       SERVICE_ID: 'service_h9thmof',
       TEMPLATE_ID: 'template_hnilla1',
       PUBLIC_KEY: 'wiKXGL1xjXwRni4xB',
-      check: true
+      check: true,
+      pin1: '',
+      pin2: '',
+      pin3: '',
+      pin4: ''
     };
   },
   methods: {
