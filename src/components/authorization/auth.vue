@@ -37,6 +37,7 @@
 
 <script>
 import emailjs from '@emailjs/browser';
+import {app} from "cli";
 
 export default {
   components: {
@@ -54,7 +55,8 @@ export default {
       pin2: '',
       pin3: '',
       pin4: '',
-      allPin: null
+      allPin: null,
+
     };
   },
   methods: {
@@ -104,6 +106,12 @@ export default {
     confirm() {
       if (this.code===this.allPin){
         console.log("WORKED")
+
+        console.log(app.config.globalProperties.auth)
+        console.log(app.config.globalProperties.auth = true)
+
+      }else {
+        alert("Коды не совпадают!")
       }
     },
     changeNumber() {
@@ -208,7 +216,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1001; /* Установим значение z-index повыше, чем у компонента Auth */
+  z-index: 1001;
   letter-spacing: 0.5px;
   font-family: Gilroy-Light;
 }
@@ -216,7 +224,7 @@ export default {
 .verification-container {
   background: white;
   padding: 40px;
-  margin-bottom: 20px;
+
   border-radius: 8px;
   width: 500px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -269,7 +277,9 @@ export default {
 .verification-change {
   font-size: 16px;
   color: #78258D;
+  margin-bottom: 20px;
   cursor: pointer;
+  border: none;
   font-family: 'Gilroy-Light';
 }
 </style>
