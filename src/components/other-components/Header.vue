@@ -9,8 +9,7 @@
       <router-link to="/tasks" exact-active-class="selected">Все задания</router-link>
       <router-link to="/contacts" exact-active-class="selected">Контакты</router-link>
     </nav>
-
-    <a class="auth" href="/cabinet" v-if="auth">Личный кабинет</a>
+    <router-link to="/cabinet" class="auth" v-if="auth">Личный кабинет</router-link>
     <a class="auth" v-else @click="$emit('change-page', 'auth')">Войти</a>
   </header>
 </template>
