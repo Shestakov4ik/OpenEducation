@@ -80,7 +80,6 @@ export default {
     },
     close() {
       this.$emit('close');
-      this.$router.back();
     },
     getRandomInt(min, max) {
       min = Math.ceil(min);
