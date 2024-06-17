@@ -2,7 +2,7 @@
   <div>
     <Header class="header" @change-page="PageChange"/>
     <router-view/>
-    <Auth v-if="authOpened" @close="closeAuth" />
+    <Auth v-if="authOpened" @close="closeAuth" @auth="logIn"/>
 
 
     <Footer class="footer"/>
@@ -28,6 +28,17 @@ export default {
     Verification,
     CoursesInfo,
     CourseBanner,
+  },
+  data(){
+    return{
+      auth: false
+    }
+  },
+  methods:{
+    logIn(auth){
+      this.auth=auth
+      console.log(this.auth)
+    }
   },
   setup() {
     const authOpened = ref(false);

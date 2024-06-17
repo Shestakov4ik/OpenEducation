@@ -37,7 +37,6 @@
 
 <script>
 import emailjs from '@emailjs/browser';
-import gl from 'global.json'
 
 export default {
   components: {
@@ -56,7 +55,6 @@ export default {
       pin3: '',
       pin4: '',
       allPin: null,
-      test: gl
 
     };
   },
@@ -107,8 +105,7 @@ export default {
     confirm() {
       if (this.code===this.allPin){
         console.log("WORKED")
-
-        console.log(this.test)
+        this.$emit('auth', true)
 
 
       }else {
