@@ -67,7 +67,7 @@ export default {
 
     const closeAuth = () => {
       authOpened.value = false;
-      router.back();
+
     };
 
     return {
