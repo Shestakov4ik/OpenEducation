@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <Header v-if="this.Check"
-            class="header"
+  <div v-if="this.Check">
+    <Header class="header"
             :auth="auth"
             @checK="check"
             @change-page="PageChange"/>
     <router-view/>
     <Auth v-if="authOpened" @close="closeAuth" @auth="logIn"/>
-    <Footer v-if="this.Check"  class="footer"/>
+    <Footer   class="footer"/>
+  </div>
+  <div v-else class="cab">
+    <router-view/>
   </div>
 </template>
 
