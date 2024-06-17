@@ -139,6 +139,7 @@ export default {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  margin-bottom: 20px;
   font-family: Gilroy-Light;
 }
 </style>
