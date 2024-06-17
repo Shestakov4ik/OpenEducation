@@ -108,7 +108,8 @@ export default {
         console.log("WORKED")
 
         console.log(app.config.globalProperties.auth)
-        console.log(app.config.globalProperties.auth = true)
+        app.config.globalProperties.auth = true
+        console.log(app.config.globalProperties.auth)
 
       }else {
         alert("Коды не совпадают!")
