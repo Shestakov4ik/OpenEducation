@@ -125,6 +125,8 @@ export default {
 .tasks-container {
   padding-bottom: 60px;
   letter-spacing: 0.5px;
+  justify-content: space-between;
+
   font-family: 'Gilroy-Light', sans-serif;
 }
 
@@ -184,6 +186,7 @@ export default {
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   box-sizing: border-box;
   background-color: #fff;
+  justify-content: space-between;
   cursor: pointer;
 }
 

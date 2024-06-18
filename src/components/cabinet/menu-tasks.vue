@@ -307,7 +307,7 @@ export default {
 }
 
 .content{
-  margin: 46px 0 100px 0;
+  margin: 46px 0 40px 0;
 }
 .details {
   display: flex;

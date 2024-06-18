@@ -18,7 +18,7 @@
     <div class="infoblock courses-current">
       <div class="infoblock-header">
         <h2>Прохожу сейчас</h2>
-        <a class="infoblock-button color-violet">Все курсы</a>
+        <a class="infoblock-button color-violet" @click="openCourse">Все курсы</a>
       </div>
       <div class="courses-content">
         <div class="courses-list">
@@ -45,7 +45,7 @@
     <div class="infoblock courses-ready">
       <div class="infoblock-header">
         <h2>Пройденные курсы</h2>
-        <a class="infoblock-button color-violet">Все курсы</a>
+        <a class="infoblock-button color-violet" @click="openCourse">Все курсы</a>
       </div>
       <div class="courses-content">
         <div class="courses-list">
@@ -74,6 +74,7 @@
 
 <script>
 import supabase from "@/supabase.js";
+import router from "@/router.js";
 
 export default {
   name: "cabHome",
@@ -115,6 +116,9 @@ export default {
     this.fetchData();
   },
   methods:{
+    openCourse(){
+      router.push("/cabinet/courses")
+    },
     async fetchData() {
       try {
         // Загрузка текущих курсов

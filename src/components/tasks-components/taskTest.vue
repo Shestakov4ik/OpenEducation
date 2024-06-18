@@ -188,6 +188,7 @@ export default {
   border-radius: 20px;
   background-color: #EEEDF2;
   padding: 50px;
+  width: 50%;
   display: flex;
   flex-direction: column;
   gap: 25px;
