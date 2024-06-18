@@ -77,6 +77,11 @@ export default {
 
 
 <style scoped>
+.course-name {
+  font-family: Gilroy, sans-serif;
+  font-size: 46px;
+  font-weight: 900;
+}
 .lessons-wrapper {
   background: white;
   width: 100%;
