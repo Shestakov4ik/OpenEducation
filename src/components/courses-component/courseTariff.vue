@@ -12,17 +12,29 @@
         <span class="less"> Урока</span>
       </div>
     </div>
-    <button class="register-button">Записаться на курс</button>
+    <button class="register-button" @click="add" >Записаться на курс</button>
   </div>
 </template>
 
 <script>
+import {a} from "vue-the-mask/src/tokens.js";
+
 export default {
   name: 'CourseInfo',
   props: {
     tariff: String,
     tasks: Number,
-    lessons: Number
+    lessons: Number,
+    chReg:Boolean
+  },
+  methods:{
+    add(){
+      if(this.chReg===false){
+        alert("Курс добавлен!")
+      } else{
+        alert("Вы не вошли в аккаунт!")
+      }
+    }
   }
 };
 </script>

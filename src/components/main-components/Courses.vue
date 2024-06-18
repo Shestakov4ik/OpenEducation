@@ -7,7 +7,7 @@
 
       <div class="shadow" @click="close"></div>
       <div class="sidebar">
-        <CoursesInfo @closeInfo="close" :id="this.courseId"/>
+        <CoursesInfo @closeInfo="close" :id="this.courseId" :reg="checkReg"/>
       </div>
     </div>
 
@@ -32,6 +32,9 @@ export default {
     return{
       courseId: null
     }
+  },
+  props:{
+    checkReg:Boolean
   },
   methods:{
     open(id){

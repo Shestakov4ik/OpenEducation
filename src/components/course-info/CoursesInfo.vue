@@ -6,7 +6,7 @@
       </div>
       <CoursesTitle :title="cours.name" :url="cours.url_icon"/>
       <CourseDescription :description="cours.description"></CourseDescription>
-      <CourseTariff class="tariFF" :tariff="tariffName" :tasks="cours.tasks" :lessons="cours.lessons"></CourseTariff>
+      <CourseTariff class="tariFF" :tariff="tariffName" :tasks="cours.tasks" :lessons="cours.lessons" :chReg="reg"></CourseTariff>
       <CourseProgram class="Program" :lessons="lessons"></CourseProgram>
       <CourseReview class="review" :reviews="reviews"></CourseReview>
     </div>
@@ -40,7 +40,8 @@ export default {
     };
   },
   props: {
-    id: Number
+    id: Number,
+    reg: Boolean
   },
   created() {
     this.fetchData();
