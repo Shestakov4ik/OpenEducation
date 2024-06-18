@@ -7,7 +7,7 @@
     <router-view :userId="userId"/>
     <Auth v-if="authOpened"
           @close="closeAuth"
-          @userId="userId"
+          @userId="UserId"
           @auth="logIn"/>
     <Footer   class="footer"/>
   </div>
@@ -42,6 +42,7 @@ export default {
     }
   },
 
+
   methods:{
     check(value){
       this.Check=value
@@ -50,9 +51,10 @@ export default {
       this.auth=auth
       console.log(this.auth)
     },
-    userId(id){
+    UserId(id){
       this.userId=id
       console.log("MainUserId: ", this.userId)
+      console.log("MainId: ", id)
     }
   },
   setup() {
