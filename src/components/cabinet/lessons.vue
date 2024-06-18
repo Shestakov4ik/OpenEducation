@@ -105,7 +105,7 @@ export default {
   width: 75%;
   padding: 0 90px;
   margin-left: 330px;
-  height: 100%;
+  height: 100vh;
   margin-top: 50px;
   display: flex;
   flex-direction: column;

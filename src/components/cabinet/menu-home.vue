@@ -221,6 +221,7 @@ export default {
 .content {
   width: 100%;
   padding: 0 90px;
+  height: 100vh;
   margin-left: 360px;
 }
 .color-violet {
