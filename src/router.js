@@ -6,7 +6,7 @@ import Contacts from './components/main-components/Contacts.vue';
 import Auth from './components/authorization/auth.vue';
 import Verification from './components/authorization/verification.vue';
 import CoursesInfo from "@/components/course-info/CoursesInfo.vue";
-import Cabinet from "@/Cabinet.vue";
+import Cabinet from "@/components/cabinet/Cabinet.vue";
 import HomeCab from "@/components/cabinet/menu-home.vue"
 import CoursesCab from "@/components/cabinet/menu-courses.vue"
 import TasksCab from "components/cabinet/menu-tasks.vue"
