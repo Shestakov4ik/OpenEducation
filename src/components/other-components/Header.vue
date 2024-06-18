@@ -27,7 +27,7 @@ export default {
   },
   data(){
     return{
-      id:null
+      id:2
     }
   },
   methods:{

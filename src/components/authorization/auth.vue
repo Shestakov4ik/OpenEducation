@@ -123,6 +123,7 @@ export default {
         } else if (user) {
           this.userId = user.id;
           console.log('User ID:', this.userId);
+          this.$emit('UserId', this.userId);
         } else {
 
           const { data: insertData, error: insertError } = await supabase
@@ -145,7 +146,7 @@ export default {
 
         }
 
-        this.$emit('UserId', this.userId);
+
       }
       else
         {

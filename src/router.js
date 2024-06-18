@@ -20,26 +20,31 @@ const routes = [
     {
         path: '/cabinet:id',
         component: Cabinet,
+        props: true,
         children: [
             {
                 path: '',  // по умолчанию
                 name: 'cabinet',
-                component: HomeCab
+                component: HomeCab,
+                props: true
             },
             {
                 path: 'home',
                 name: 'cabHome',
-                component: HomeCab
+                component: HomeCab,
+                props: true
             },
             {
                 path: 'courses',
                 name: 'cabCourses',
-                component: CoursesCab
+                component: CoursesCab,
+                props: true
             },
             {
                 path: 'tasks',
                 name: 'cabTasks',
-                component: TasksCab
+                component: TasksCab,
+                props: true
             },
         ]
     },
