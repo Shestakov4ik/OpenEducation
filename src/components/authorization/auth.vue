@@ -128,8 +128,8 @@ export default {
           const { data: insertData, error: insertError } = await supabase
               .from('users')
               .insert({ email: this.email }) // Добавляем пользователя с указанным email
-              .select('id') // Используем select для получения возвращаемых данных
-              .single(); // Ожидаем одну запись, возвращаемую при вставке
+              .select() // Используем select для получения возвращаемых данных
+
           if (insertError) {
             console.error('Error inserting email:', insertError);
           } else {
