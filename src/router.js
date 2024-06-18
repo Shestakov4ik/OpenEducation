@@ -10,6 +10,7 @@ import HomeCab from "./components/cabinet/menu-home.vue"
 import CoursesCab from "./components/cabinet/menu-courses.vue"
 import TasksCab from "./components/cabinet/menu-tasks.vue"
 import ListLessons from "./components/cabinet/lessons.vue"
+import LessContent from "./components/cabinet/less-content.vue"
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -51,6 +52,12 @@ const routes = [
                 path: 'lessons',
                 name: 'less',
                 component: ListLessons,
+                props: true
+            },
+            {
+                path: 'less',
+                name: 'lesscontent',
+                component: LessContent,
                 props: true
             },
         ]

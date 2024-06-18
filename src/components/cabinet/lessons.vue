@@ -1,7 +1,7 @@
 <template>
   <div class="lessons-wrapper">
     <div class="go-to-back">
-      <img src="../../assets/back.svg" alt="Go to back">
+      <img src="../../assets/back.svg" @click="back" alt="Go to back">
     </div>
     <div class="course-info">
       <div class="course-icon">
@@ -11,7 +11,10 @@
     </div>
     <ul class="lessons-list">
       <h2>Программа курса</h2>
-      <li v-for="(lesson, index) in lessons" :key="lesson.id" class="lesson-item">
+      <li v-for="(lesson, index) in lessons"
+          :key="lesson.id"
+          class="lesson-item"
+          @click="this.$emit('openContent', lesson.id)">
         <span class="lesson-index">Урок {{ index + 1 }}:</span>
         <span class="lesson-name">{{ lesson.name }}</span>
       </li>
@@ -24,6 +27,7 @@
 <script>
 import { createClient } from '@supabase/supabase-js';
 import supabase from "@/supabase.js";
+import router from "@/router.js";
 
 export default {
   name:"less",
@@ -41,6 +45,9 @@ export default {
     this.fetchCourseInfo();
   },
   methods: {
+    openContent(){
+      router.push("/cabinet/less");
+    },
     async fetchData() {
            try {
         const { data: lessonsData, error } = await supabase
@@ -55,6 +62,9 @@ export default {
       } catch (error) {
         console.error('Ошибка при загрузке уроков:', error.message);
       }
+    },
+    back(){
+      router.push("/cabinet/courses")
     },
     async fetchCourseInfo() {
       try {
@@ -137,6 +147,7 @@ export default {
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 4px 20px 0 #EEEDF2;
+  cursor: pointer;
 }
 
 .lesson-index {

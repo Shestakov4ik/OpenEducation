@@ -195,7 +195,6 @@
 
 <style scoped>
 .wrapper {
-  background: white;
   width: 100%;
   padding: 0 90px;
   margin-left: 330px;

@@ -2,7 +2,7 @@
   <div class="wrapper">
     <Menu/>
 
-    <router-view  :id="courseid" @openLess="open"/>
+    <router-view  :id="courseid"  :idLess="lessId"  @openLess="open" @openContent="openContent"/>
 
   </div>
 </template>
@@ -24,10 +24,17 @@ import router from "@/router.js";
     },
     data() {
       return {
-        courseid: null
+        courseid: null,
+        lessId: null
       }
     },
     methods:{
+      openContent(id){
+        this.lessId = id;
+        if(this.lessId!==null){
+          router.push("/cabinet/less")
+        }
+      },
       open(id){
         this.courseid=id
         if (this.courseid!==null){

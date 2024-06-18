@@ -79,12 +79,14 @@
 .buttons {
   display: flex;
   flex-direction: column;
+
 }
 .buttons a {
   display: flex;
   align-items: center;
   padding: 15px;
   color: #78258D;
+  text-decoration: none !important;
 }
 .menu {
   padding: 0;
