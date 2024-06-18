@@ -21,13 +21,13 @@ import router from "@/router.js";
       PageChange(page){
         switch(page){
           case "cabHome":
-            router.push("/cabHome");
+            router.push("/cabinet/cabHome");
             break;
           case "cabCourses":
-            router.push("/cabCourses");
+            router.push("/cabinet/cabCourses");
             break;
           case "cabTasks":
-            router.push("/cabTasks");
+            router.push("/cabinet/cabTasks");
             break;
         }
       }
