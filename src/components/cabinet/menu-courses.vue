@@ -195,6 +195,7 @@
   padding: 0 90px;
   margin-left: 330px;
   height: 100%;
+  margin-top: 50px;
   display: inline-block;
 }
 
