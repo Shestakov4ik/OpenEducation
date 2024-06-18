@@ -20,7 +20,6 @@ import router from './router.js';
 import Header from './components/other-components/Header.vue';
 import Footer from './components/other-components/Footer.vue';
 import Auth from './components/authorization/auth.vue';
-import Verification from './components/authorization/verification.vue';
 import CoursesInfo  from "@/components/course-info/CoursesInfo.vue";
 import CourseBanner from "@/components/home-components/coursBanner.vue"
 
@@ -29,7 +28,6 @@ export default {
     Header,
     Footer,
     Auth,
-    Verification,
     CoursesInfo,
     CourseBanner,
   },
