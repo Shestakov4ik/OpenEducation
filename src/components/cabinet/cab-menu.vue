@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapperok">
     <div class="sidebar">
       <div class="logo">
         <a href="#">
