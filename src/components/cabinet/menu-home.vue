@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: "cabhome",
+  name: "cabHome",
 }
 
 </script>
