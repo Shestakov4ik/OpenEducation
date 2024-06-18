@@ -1,10 +1,16 @@
 <template>
   <div class="lessons-wrapper">
+    <div class="go-to-back">
+      <img src="../../assets/back.svg" alt="Go to back">
+    </div>
     <div class="course-info">
-      <img :src="course.url_icon" alt="Course Icon" class="course-icon" v-if="course.url_icon">
+      <div class="course-icon">
+        <img :src="course.url_icon" alt="Course Icon" class="course-icon" v-if="course.url_icon">
+      </div>
       <span class="course-name">{{ course.name }}</span>
     </div>
     <ul class="lessons-list">
+      <h2>Программа курса</h2>
       <li v-for="(lesson, index) in lessons" :key="lesson.id" class="lesson-item">
         <span class="lesson-index">Урок {{ index + 1 }}:</span>
         <span class="lesson-name">{{ lesson.name }}</span>
@@ -77,33 +83,60 @@ export default {
 
 
 <style scoped>
+.go-to-back {
+  cursor: pointer;
+}
 .course-name {
   font-family: Gilroy, sans-serif;
   font-size: 46px;
   font-weight: 900;
 }
 .lessons-wrapper {
-  background: white;
-  width: 100%;
+  width: 75%;
   padding: 0 90px;
   margin-left: 330px;
   height: 100%;
   margin-top: 50px;
-  display: inline-block;
-  font-family: Gilroy-Light, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  font-family: Gilroy, sans-serif;
+  font-weight: 500;
 }
-
+.course-info {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.course-icon {
+  width: 100px;
+  height: 100px;
+}
+.course-icon img {
+  width: 100%;
+  height: 100%;
+}
+.lessons-list h2 {
+  font-family: Gilroy, sans-serif;
+  font-weight: 900;
+  font-size: 32px;
+}
 .lessons-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .lesson-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  padding: 20px 0;
+  padding: 25px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px 0 #EEEDF2;
 }
 
 .lesson-index {
