@@ -54,7 +54,7 @@
        router.push("/cabinet/tasks");
      },
      backMain(){
-       router.push("/")
+       router.push("/");
      }
    }
  }
