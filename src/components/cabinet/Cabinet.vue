@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <Menu/>
-    <router-view/>
+    <router-view :id="userId"/>
   </div>
 </template>
 
@@ -13,6 +13,14 @@ import Menu from '@/components/cabinet/cab-menu.vue'
     name:'cabinet',
     components: {
       Menu
+    },
+    props: {
+      userId: Number
+    },
+    data() {
+      return {
+        userid: null
+      }
     }
   }
 

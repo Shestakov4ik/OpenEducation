@@ -144,6 +144,8 @@ export default {
           }
 
         }
+
+        this.$emit('userId', this.userId);
       }
       else
         {

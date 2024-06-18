@@ -4,8 +4,11 @@
             :auth="auth"
             @checK="check"
             @change-page="PageChange"/>
-    <router-view/>
-    <Auth v-if="authOpened" @close="closeAuth" @auth="logIn"/>
+    <router-view :userId="userId"/>
+    <Auth v-if="authOpened"
+          @close="closeAuth"
+          @userId="userId"
+          @auth="logIn"/>
     <Footer   class="footer"/>
   </div>
   <div v-else class="cab">
@@ -34,7 +37,8 @@ export default {
   data(){
     return{
       auth: false,
-      Check:true
+      Check:true,
+      userId:null
     }
   },
 
@@ -45,6 +49,10 @@ export default {
     logIn(auth){
       this.auth=auth
       console.log(this.auth)
+    },
+    userId(id){
+      this.userId=id
+      console.log("MainUserId: ", this.userId)
     }
   },
   setup() {

@@ -43,6 +43,12 @@
 <script>
 export default {
   name: "cabHome",
+  props: {
+    userId: Number
+  },
+  created() {
+    console.log(this.userId)
+  }
 }
 
 </script>
