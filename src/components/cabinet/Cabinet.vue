@@ -1,25 +1,42 @@
 <template>
   <div class="wrapper">
     <Menu/>
-    <router-view :id="userId"/>
+
+    <router-view  :id="courseid" @openLess="open"/>
+
   </div>
 </template>
 
 <script >
 import Menu from '@/components/cabinet/cab-menu.vue'
+import LEss from '@/components/cabinet/lessons.vue'
+import router from "@/router.js";
 
 
   export default {
     name:'cabinet',
     components: {
-      Menu
+      Menu,
+      LEss
     },
     props: {
       userId: Number
     },
     data() {
       return {
-        userid: null
+        courseid: null
+      }
+    },
+    methods:{
+      open(id){
+        this.courseid=id
+        if (this.courseid!==null){
+          router.push("/cabinet/lessons")
+        }
+        else{
+          console.log("Error ska")
+        }
+
       }
     }
   }

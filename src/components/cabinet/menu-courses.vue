@@ -21,8 +21,8 @@
           <div
               class="course-block"
               v-for="course in filteredCourses"
-              :key="course.id"
-              @click="openLessons"
+              :courseId="course.id"
+              @click="this.$emit('openLess', course.id)"
               :style="{ background: course.color }">
             <div class="icon-container">
               <img :src="course.url_icon" alt="Icon" class="icon">
@@ -119,6 +119,7 @@
               color: course.background,
               url_icon: course.url_icon
             }));
+
 
             this.featuredCourse = this.courses.length > 0 ? this.courses[0] : null;
 
