@@ -145,7 +145,7 @@ export default {
 .filter-button {
   padding: 10px 20px;
   font-size: 16px;
-  font-family: Gilroy, sans-serif;
+  font-family: Gilroy-Regular, sans-serif;
   font-weight: 500;
   border: 2px solid #ffffff;
   border-radius: 8px;

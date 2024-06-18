@@ -174,7 +174,7 @@ export default {
   cursor: pointer;
 }
 .test-container {
-  font-family: Gilroy, sans-serif;
+  font-family: Gilroy-Regular, sans-serif;
   display: flex;
   flex-direction: column;
 }
@@ -182,6 +182,7 @@ export default {
 .test-header h1 {
   font-size: 46px;
   font-weight: 900;
+  font-family: Gilroy-ExtraBold;
 }
 
 .question-section {
@@ -210,7 +211,7 @@ export default {
 }
 
 .answer-options button {
-  font-family: Gilroy, sans-serif;
+  font-family: Gilroy-Regular, sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: #78258D;
@@ -232,7 +233,7 @@ export default {
 }
 
 .answer-btn button {
-  font-family: Gilroy, sans-serif;
+  font-family: Gilroy-Regular, sans-serif;
   font-weight: 500;
   font-size: 18px;
   color: white;
@@ -260,7 +261,7 @@ export default {
 .tags div {
   border-radius: 8px;
   padding: 5px 20px;
-  font-family: Gilroy, sans-serif;
+  font-family: Gilroy-Regular, sans-serif;
   font-weight: 500;
   font-size: 18px;
 }

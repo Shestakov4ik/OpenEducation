@@ -97,7 +97,7 @@ export default {
   cursor: pointer;
 }
 .course-name {
-  font-family: Gilroy, sans-serif;
+  font-family: Gilroy-ExtraBold, sans-serif;
   font-size: 46px;
   font-weight: 900;
 }
@@ -110,7 +110,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 50px;
-  font-family: Gilroy, sans-serif;
+  font-family: Gilroy-Regular, sans-serif;
   font-weight: 500;
 }
 .course-info {
@@ -127,7 +127,7 @@ export default {
   height: 100%;
 }
 .lessons-list h2 {
-  font-family: Gilroy, sans-serif;
+  font-family: Gilroy-ExtraBold, sans-serif;
   font-weight: 900;
   font-size: 32px;
 }

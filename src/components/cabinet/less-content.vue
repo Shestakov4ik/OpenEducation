@@ -1,7 +1,7 @@
 <template>
   <div class="lesscontent-wrapper">
     <div class="back-to-go">
-      <img src="../../assets/back.svg" alt="Back to go">
+      <img src="../../assets/back.svg" alt="Back to go" @click="backCourse">
     </div>
     <div class="read-column">
       <div class="lesscontent-title">
@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import router from "@/router.js";
+
 export default {
   name: "lesscontent",
   props: {
@@ -57,6 +59,11 @@ export default {
   },
   created() {
     console.log("lesscon", this.idLess)
+  },
+  methods:{
+    backCourse(){
+      router.push("/cabinet/lessons")
+    }
   }
 }
 </script>
@@ -72,7 +79,7 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 50px;
-  font-family: Gilroy, sans-serif;
+  font-family: Gilroy-Regular, sans-serif;
   font-weight: 500;
 }
 .lesscontent-title h1 {
@@ -125,6 +132,9 @@ p {
 .arrays .deactive-array {
   cursor: default;
   color: #0005;
+}
+.back-to-go{
+  cursor: pointer;
 }
 
 </style>
