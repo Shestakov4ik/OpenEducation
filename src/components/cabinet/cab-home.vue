@@ -6,7 +6,7 @@
         <p class="subtitle">Достигайте своих целей с современной и доступной образовательной платформой</p>
       </div>
       <div class="lc-img">
-        <img src="../src/assets/smart-boy.png" alt="Smart Boy">
+        <img src="@/assets/men-num2.png" alt="Smart Boy">
       </div>
     </div>
     <div class="infoblock tariff">
