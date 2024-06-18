@@ -37,6 +37,8 @@
 
 <script>
 import emailjs from '@emailjs/browser';
+import supabase from '@/supabase.js';
+
 
 export default {
   components: {
@@ -55,6 +57,7 @@ export default {
       pin3: '',
       pin4: '',
       allPin: null,
+      userId: null
 
     };
   },
@@ -101,21 +104,53 @@ export default {
       console.log('Submitted PIN:', this.allPin);
 
     },
-    confirm() {
-      if (this.code===this.allPin){
+    async confirm() {
+      if (this.code === this.allPin) {
         console.log("WORKED")
         this.$emit('auth', true)
         this.$emit('close');
 
 
-      }else {
-        alert("Коды не совпадают!")
+
+        const {data: user, error: checkError} = await supabase
+            .from('users')
+            .select('id')
+            .eq('email', this.email)
+            .single();
+
+        if (checkError) {
+          console.error('Error checking email:', checkError);
+        } else if (user) {
+          this.userId = user.id;
+          console.log('User ID:', this.userId);
+        } else {
+
+          const { data: insertData, error: insertError } = await supabase
+              .from('users')
+              .insert({ email: this.email }) // Добавляем пользователя с указанным email
+              .select() // Используем select для получения возвращаемых данных
+              .single(); // Ожидаем одну запись, возвращаемую при вставке
+          if (insertError) {
+            console.error('Error inserting email:', insertError);
+          } else {
+            this.userId = insertData.id;
+            console.log('New User ID:', this.userId);
+          }
+
+        }
       }
+      else
+        {
+          alert("Коды не совпадают!")
+        }
+      }
+    ,
+      changeNumber()
+      {
+        this.check = true
+      }
+    ,
     },
-    changeNumber() {
-      this.check = true
-    }
-  },
 };
 </script>
 
