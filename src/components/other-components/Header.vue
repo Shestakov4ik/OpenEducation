@@ -34,7 +34,7 @@ export default {
     openCab(){
       console.log("UserIdHeader", this.userId)
       this.id=this.userId
-      router.push({name: 'cabinet', params: this.id})
+      router.push({name: 'cabinet', params: {id:this.id}})
     }
   }
 };
