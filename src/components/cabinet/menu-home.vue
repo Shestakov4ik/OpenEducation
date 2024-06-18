@@ -27,11 +27,11 @@
               v-for="course in filteredCourses"
               :key="course.id"
               :style="{ background: course.color }"
-              @click = "this.$emit('openInfo', course.id)">
+              @click="this.$emit('openInfo', course.id)">
             <div class="icon-container">
               <img :src="course.url_icon" alt="Icon" class="icon">
             </div>
-            <div class="content">
+            <div class="contentBlock">
               <h2>{{ course.name }}</h2>
               <div class="details">
                 <span class="course-type">{{ getTariffName(course.id_tariff) }}</span>
@@ -40,18 +40,34 @@
             </div>
           </div>
         </div>
+      </div>
     </div>
     <div class="infoblock courses-ready">
       <div class="infoblock-header">
         <h2>Пройденные курсы</h2>
         <a class="infoblock-button color-violet">Все курсы</a>
       </div>
-      <div class="courses-list">
-        <div class="course">Course</div>
-        <div class="course">Course</div>
-        <div class="course">Course</div>
+      <div class="courses-content">
+        <div class="courses-list">
+          <div
+              class="course-block"
+              v-for="course in completedCourses"
+              :key="course.id"
+              :style="{ background: course.color }"
+              @click="this.$emit('openInfo', course.id)">
+            <div class="icon-container">
+              <img :src="course.url_icon" alt="Icon" class="icon">
+            </div>
+            <div class="contentBlock">
+              <h2>{{ course.name }}</h2>
+              <div class="details">
+                <span class="course-type">{{ getTariffName(course.id_tariff) }}</span>
+                <span class="tariff-type">{{ getTypeName(course.id_direction) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
     </div>
   </div>
 </template>
@@ -67,6 +83,7 @@ export default {
   data() {
     return {
       courses: [],
+      completedCourses: [], // Новый массив для завершенных курсов
       directions: [],
       tariffs: [],
       currentTypeFilter: null,
@@ -100,26 +117,80 @@ export default {
   methods:{
     async fetchData() {
       try {
-        const { data: coursesData, error: coursesError } = await supabase.from('courses').select('*');
-        if (coursesError) throw coursesError;
+        // Загрузка текущих курсов
+        const { data: myCoursesData, error: myCoursesError } = await supabase
+            .from('myCourses')
+            .select('id_course')
+            .eq('id_user',1) // Используйте пропс userId
+            .eq('status', 'Начатый');
 
+        if (myCoursesError) throw myCoursesError;
+        console.log("My Courses Data:", myCoursesData);
+
+        const courseIds = myCoursesData.map(mc => mc.id_course);
+
+        if (courseIds.length > 0) {
+          const { data: coursesData, error: coursesError } = await supabase
+              .from('courses')
+              .select('*')
+              .in('id', courseIds);
+
+          if (coursesError) throw coursesError;
+          console.log("Courses Data:", coursesData);
+
+          this.courses = coursesData.map(course => ({
+            id: course.id,
+            name: course.name,
+            description: course.description,
+            id_tariff: course.id_tariff,
+            id_direction: course.id_direction,
+            color: course.background,
+            url_icon: course.url_icon
+          }));
+
+          this.featuredCourse = this.courses.length > 0 ? this.courses[0] : null;
+        }
+
+        // Загрузка завершенных курсов
+        const { data: completedCoursesData, error: completedCoursesError } = await supabase
+            .from('myCourses')
+            .select('id_course')
+            .eq('id_user', 1) // Используйте пропс userId
+            .eq('status', 'Пройденный');
+
+        if (completedCoursesError) throw completedCoursesError;
+        console.log("Completed Courses Data:", completedCoursesData);
+
+        const completedCourseIds = completedCoursesData.map(mc => mc.id_course);
+
+        if (completedCourseIds.length > 0) {
+          const { data: completedCourses, error: completedCoursesError } = await supabase
+              .from('courses')
+              .select('*')
+              .in('id', completedCourseIds);
+
+          if (completedCoursesError) throw completedCoursesError;
+          console.log("Completed Courses Details:", completedCourses);
+
+          this.completedCourses = completedCourses.map(course => ({
+            id: course.id,
+            name: course.name,
+            description: course.description,
+            id_tariff: course.id_tariff,
+            id_direction: course.id_direction,
+            color: course.background,
+            url_icon: course.url_icon
+          }));
+        }
+
+        // Загрузка направлений и тарифов
         const { data: directionsData, error: directionsError } = await supabase.from('direction').select('*');
         if (directionsError) throw directionsError;
+        console.log("Directions Data:", directionsData);
 
         const { data: tariffsData, error: tariffsError } = await supabase.from('tariff').select('*');
         if (tariffsError) throw tariffsError;
-
-        this.courses = coursesData.map(course => ({
-          id: course.id,
-          name: course.name,
-          description: course.description,
-          id_tariff: course.id_tariff,
-          id_direction: course.id_direction,
-          color: course.background,
-          url_icon: course.url_icon
-        }));
-
-        this.featuredCourse = this.courses.length > 0 ? this.courses[0] : null;
+        console.log("Tariffs Data:", tariffsData);
 
         this.directions = directionsData;
         this.tariffs = tariffsData;
@@ -137,11 +208,9 @@ export default {
     getTariffName(tariffId) {
       const tariff = this.tariffs.find(t => t.id === tariffId);
       return tariff ? tariff.name : '';
-    },
-    
+    }
   }
 }
-
 </script>
 
 <style scoped>
@@ -156,7 +225,6 @@ export default {
 .infoblock {
   background-color: #F9F9F9;
   border-radius: 20px;
-  /*box-shadow: 0 4px 10px 0 #F9F9F9;*/
   display: flex;
   flex-direction: column;
   margin: 40px 0;
@@ -179,7 +247,7 @@ export default {
   border: 1px solid #78258D;
   padding: 12px 16px;
   font-weight: 600;
-  font-family: Gilroy-Lightб, sans-serif;
+  font-family: Gilroy-Light, sans-serif;
   cursor: pointer;
 }
 .courses-list {
@@ -221,8 +289,7 @@ export default {
   width: 100%;
 }
 
-
-/*тариф*/
+/* Тариф */
 .tariff-name {
   font-size: 18px;
   font-family: Gilroy-Light,sans-serif;
@@ -231,6 +298,7 @@ export default {
 .courses-content {
   display: flex;
   justify-content: space-between;
+  max-width: 100%;
 }
 
 .courses-list {
@@ -239,13 +307,12 @@ export default {
   gap: 20px;
   margin-right: 40px;
   flex-grow: 1;
-  max-width: calc(100% - 50px);
 }
 
 .course-block {
   display: inline-block;
   vertical-align: top;
-  width: 440px;
+  width: 435px;
   height: 264px;
   display: flex;
   flex-shrink: 0;
@@ -277,7 +344,7 @@ export default {
   font-size: 46px;
 }
 
-.content {
+.contentBlock {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -305,6 +372,4 @@ export default {
 .tariff-type {
   color: #78258D;
 }
-
-
 </style>
