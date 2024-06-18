@@ -1,13 +1,32 @@
 <template>
-Личный кабинет
+  <div class="wrapper">
+    <Menu/>
+    <Home/>
+  </div>
 </template>
 
-<script>
-export default {
-  name: 'cabinet',
-}
+<script >
+import Menu from '@/components/cabinet/cab-menu.vue'
+import Home from '@/components/cabinet/cab-home.vue'
+
+  export default {
+    name:'cabinet',
+    components: {
+      Menu,
+      Home
+    }
+  }
+
 </script>
 
+
 <style scoped>
+.wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background: linear-gradient(135deg, #F0E4ED 0%, #F1F7FB 100%);
+}
+
 
 </style>
