@@ -128,12 +128,18 @@ export default {
           const { data: insertData, error: insertError } = await supabase
               .from('users')
               .insert({ email: this.email }) // Добавляем пользователя с указанным email
-              .select() // Используем select для получения возвращаемых данных
+
+          const {data: userIn} = await supabase
+              .from('users')
+              .select('id')
+              .eq('email', this.email)
+              .single();
+
 
           if (insertError) {
             console.error('Error inserting email:', insertError);
           } else {
-            this.userId = insertData.id;
+            this.userId = userIn.id;
             console.log('New User ID:', this.userId);
           }
 
