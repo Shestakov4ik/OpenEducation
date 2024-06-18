@@ -50,6 +50,7 @@
   flex-direction: column;
   padding: 40px 30px;
   position: fixed;
+  font-family: Gilroy-Light, sans-serif;
 }
 .logo a {
   cursor: pointer;

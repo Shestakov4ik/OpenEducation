@@ -71,6 +71,7 @@
   color: #232323;
   font-size: 32px;
   font-weight: 900;
+  font-family: Gilroy-Bold, sans-serif;
   margin: 0;
 }
 .infoblock-button {
@@ -101,11 +102,13 @@
 .title h1, .title span {
   font-size: 60px;
   font-weight: 900;
+  font-family: Gilroy-ExtraBold, sans-serif;
 }
 .subtitle {
   font-size: 20px;
   line-height: 35px;
   color: #828282;
+  font-family: Gilroy-Light, sans-serif;
   margin: 0;
 }
 .lc-img {
