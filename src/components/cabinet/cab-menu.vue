@@ -6,25 +6,25 @@
           <img src="@/assets/logo/logo.svg" alt="OpenEdu Logo">
         </a>
       </div>
-      <nav class="menu">
-        <router-link to="/cabHome" exact-active-class="selected" class="active">
+      <ul class="menu">
+        <li class="active" @click="openHome">
           <img src="@/assets/cabinet/home.svg" alt="Sleep">
           <span>Главная</span>
-        </router-link>
-        <router-link to="/cabCourses" exact-active-class="selected">
+        </li>
+        <li @click="openCourses">
           <img src="@/assets/cabinet/cours.svg" alt="Learn">
           <span>Курсы</span>
-        </router-link>
-        <router-link to="/cabTasks" exact-active-class="selected">
+        </li>
+        <li>
           <img src="@/assets/cabinet/tasks.svg" alt="Train">
           <span>Задания</span>
-        </router-link>
-      </nav>
+        </li>
+      </ul>
       <div class="buttons">
-        <router-link to="/">
+        <a href="#">
           <img src="@/assets/cabinet/backtosait.svg" alt="Go To General Site">
           <span>Перейти на основной сайт</span>
-        </router-link>
+        </a>
         <a href="#" class="tech-support">
           <img src="@/assets/cabinet/phonecall.svg" alt="Help Me">
           <span>Связаться с техподдержкой</span>
@@ -39,8 +39,18 @@
 
 <script>
 
+ import router from "@/router.js";
+
  export default {
    name: 'CabMenu',
+   methods:{
+     openHome(){
+       router.push("/cabHome")
+     },
+     openCourses(){
+       router.push("/cabCourses")
+     }
+   }
  }
 
 
