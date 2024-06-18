@@ -7,15 +7,15 @@
         </a>
       </div>
       <nav class="menu">
-        <router-link to="/cabhome" exact-active-class="selected" class="active">
+        <router-link to="/cabHome" exact-active-class="selected" class="active">
           <img src="@/assets/cabinet/home.svg" alt="Sleep">
           <span>Главная</span>
         </router-link>
-        <router-link to="/cabcourses" exact-active-class="selected">
+        <router-link to="/cabCourses" exact-active-class="selected">
           <img src="@/assets/cabinet/cours.svg" alt="Learn">
           <span>Курсы</span>
         </router-link>
-        <router-link to="/cabtasks" exact-active-class="selected">
+        <router-link to="/cabTasks" exact-active-class="selected">
           <img src="@/assets/cabinet/tasks.svg" alt="Train">
           <span>Задания</span>
         </router-link>
