@@ -21,7 +21,7 @@
         </li>
       </ul>
       <div class="buttons">
-        <a href="#">
+        <a href="#" @click="backMain">
           <img src="@/assets/cabinet/backtosait.svg" alt="Go To General Site">
           <span>Перейти на основной сайт</span>
         </a>
@@ -52,6 +52,9 @@
      },
      openTasks() {
        router.push("/cabinet/tasks");
+     },
+     backMain(){
+       router.push("/")
      }
    }
  }
