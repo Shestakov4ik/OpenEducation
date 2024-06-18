@@ -79,6 +79,7 @@
   border: 1px solid #78258D;
   padding: 12px 16px;
   font-weight: 600;
+  font-family: Gilroy-Lightб, sans-serif;
   cursor: pointer;
 }
 .courses-list {
@@ -124,6 +125,7 @@
 /*тариф*/
 .tariff-name {
   font-size: 18px;
+  font-family: Gilroy-Light,sans-serif;
 }
 
 </style>
