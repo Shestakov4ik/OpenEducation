@@ -7,15 +7,15 @@
         </a>
       </div>
       <ul class="menu">
-        <li class="active" @click="$emit('change-page', 'cabHome')">
+        <li class="active" @click="openHome">
           <img src="@/assets/cabinet/home.svg" alt="Sleep">
           <span>Главная</span>
         </li>
-        <li @click="$emit('change-page', 'cabCourses')">
+        <li @click="openCourses">
           <img src="@/assets/cabinet/cours.svg" alt="Learn">
           <span>Курсы</span>
         </li>
-        <li @click="$emit('change-page', 'cabTasks')">
+        <li>
           <img src="@/assets/cabinet/tasks.svg" alt="Train">
           <span>Задания</span>
         </li>

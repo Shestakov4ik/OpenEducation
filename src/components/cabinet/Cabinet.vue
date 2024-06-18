@@ -1,36 +1,18 @@
 <template>
   <div class="wrapper">
-    <Menu  @change-page="PageChange"/>
+    <Menu/>
     <router-view/>
   </div>
 </template>
 
 <script >
 import Menu from '@/components/cabinet/cab-menu.vue'
-import Header from "@/components/other-components/Header.vue";
-import router from "@/router.js";
 
 
   export default {
     name:'cabinet',
     components: {
-      Header,
       Menu
-    },
-    methods:{
-      PageChange(page){
-        switch(page){
-          case "cabHome":
-            router.push("/cabinet/cabHome");
-            break;
-          case "cabCourses":
-            router.push("/cabinet/cabCourses");
-            break;
-          case "cabTasks":
-            router.push("/cabinet/cabTasks");
-            break;
-        }
-      }
     }
   }
 
