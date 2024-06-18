@@ -15,7 +15,7 @@
           <img src="@/assets/cabinet/cours.svg" alt="Learn">
           <span>Курсы</span>
         </li>
-        <li>
+        <li @click="openTasks">
           <img src="@/assets/cabinet/tasks.svg" alt="Train">
           <span>Задания</span>
         </li>
@@ -45,10 +45,13 @@
    name: 'CabMenu',
    methods:{
      openHome(){
-       router.push("/cabHome")
+       router.push("/cabinet/home")
      },
      openCourses(){
-       router.push("/cabCourses")
+       router.push("/cabinet/courses")
+     },
+     openTasks() {
+       router.push("/cabinet/tasks");
      }
    }
  }

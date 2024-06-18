@@ -19,10 +19,32 @@ const routes = [
     { path: '/auth', name: 'Auth', component: Auth },
     { path: '/verification', name: 'Verification', component: Verification },
     { path: '/courseinfo:id', name: 'courseinfo', component: CoursesInfo },
-    { path: '/cabinet', name: 'cabinet', component: Cabinet },
-    { path: '/cabHome', name: 'cabHome', component: HomeCab },
-    { path: '/cabCourses', name: 'cabCourses', component: CoursesCab },
-    { path: '/cabTasks', name: 'cabTasks', component: TasksCab },
+    {
+        path: '/cabinet',
+        component: Cabinet,
+        children: [
+            {
+                path: '',  // по умолчанию
+                name: 'cabinet',
+                component: HomeCab
+            },
+            {
+                path: 'home',
+                name: 'cabHome',
+                component: HomeCab
+            },
+            {
+                path: 'courses',
+                name: 'cabCourses',
+                component: CoursesCab
+            },
+            {
+                path: 'tasks',
+                name: 'cabTasks',
+                component: TasksCab
+            },
+        ]
+    },
 
 
 ];
