@@ -34,7 +34,7 @@ export default {
     }
   },
   props:{
-    checkReg:Boolean
+    checkReg:Number
   },
   methods:{
     open(id){

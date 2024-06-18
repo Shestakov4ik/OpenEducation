@@ -5,7 +5,7 @@
             :userId="userId"
             @checK="check"
             @change-page="PageChange"/>
-    <router-view :userId="userId" :checkReg="Check"/>
+    <router-view :userId="userId" :checkReg="userId"/>
     <Auth v-if="authOpened"
           @close="closeAuth"
           @userId="UserId"

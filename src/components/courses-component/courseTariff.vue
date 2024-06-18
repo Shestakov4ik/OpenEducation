@@ -25,11 +25,11 @@ export default {
     tariff: String,
     tasks: Number,
     lessons: Number,
-    chReg:Boolean
+    chReg:Number
   },
   methods:{
     add(){
-      if(this.chReg===false){
+      if(this.chReg!==null){
         alert("Курс добавлен!")
       } else{
         alert("Вы не вошли в аккаунт!")

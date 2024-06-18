@@ -41,7 +41,7 @@ export default {
   },
   props: {
     id: Number,
-    reg: Boolean
+    reg: Number
   },
   created() {
     this.fetchData();
