@@ -38,6 +38,10 @@
 </template>
 
 <script>
+ export default {
+   name: 'CabMenu',
+ }
+
 
 </script>
 
