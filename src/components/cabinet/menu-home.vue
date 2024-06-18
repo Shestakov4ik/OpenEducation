@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: "MenuHome",
+  name: "cabhome",
 }
 
 </script>

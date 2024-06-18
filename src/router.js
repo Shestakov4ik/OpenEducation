@@ -20,9 +20,9 @@ const routes = [
     { path: '/verification', name: 'Verification', component: Verification },
     { path: '/courseinfo:id', name: 'courseinfo', component: CoursesInfo },
     { path: '/cabinet', name: 'cabinet', component: Cabinet },
-    { path: '/cabhome', name: 'MenuHome', component: HomeCab },
-    { path: '/cabcourses', name: 'MenuCourses', component: CoursesCab },
-    { path: '/cabtasks', name: 'MenuTasks', component: TasksCab },
+    { path: '/cabhome', name: 'cabhome', component: HomeCab },
+    { path: '/cabcourses', name: 'cabcourses', component: CoursesCab },
+    { path: '/cabtasks', name: 'cabtasks', component: TasksCab },
 
 
 ];

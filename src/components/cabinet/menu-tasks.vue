@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "MenuTasks",
+  name: "cabtasks",
 }
 
 </script>
