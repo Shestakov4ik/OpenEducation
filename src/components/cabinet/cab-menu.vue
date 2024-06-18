@@ -6,25 +6,25 @@
           <img src="@/assets/logo/logo.svg" alt="OpenEdu Logo">
         </a>
       </div>
-      <ul class="menu">
-        <li class="active">
+      <nav class="menu">
+        <router-link to="/cabhome" exact-active-class="selected" class="active">
           <img src="@/assets/cabinet/home.svg" alt="Sleep">
           <span>Главная</span>
-        </li>
-        <li>
+        </router-link>
+        <router-link to="/cabcourses" exact-active-class="selected">
           <img src="@/assets/cabinet/cours.svg" alt="Learn">
           <span>Курсы</span>
-        </li>
-        <li>
+        </router-link>
+        <router-link to="/cabtasks" exact-active-class="selected">
           <img src="@/assets/cabinet/tasks.svg" alt="Train">
           <span>Задания</span>
-        </li>
-      </ul>
+        </router-link>
+      </nav>
       <div class="buttons">
-        <a href="#">
+        <router-link to="/">
           <img src="@/assets/cabinet/backtosait.svg" alt="Go To General Site">
           <span>Перейти на основной сайт</span>
-        </a>
+        </router-link>
         <a href="#" class="tech-support">
           <img src="@/assets/cabinet/phonecall.svg" alt="Help Me">
           <span>Связаться с техподдержкой</span>
@@ -92,5 +92,9 @@
 .tech-support {
   border: 1px solid #78258D;
   border-radius: 10px;
+}
+
+.selected {
+  color: #78258D !important;
 }
 </style>

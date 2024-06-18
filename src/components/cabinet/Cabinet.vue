@@ -7,7 +7,7 @@
 
 <script >
 import Menu from '@/components/cabinet/cab-menu.vue'
-import Home from '@/components/cabinet/cab-home.vue'
+import Home from '@/components/cabinet/menu-home.vue'
 
   export default {
     name:'cabinet',

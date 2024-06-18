@@ -41,6 +41,9 @@
 </template>
 
 <script>
+export default {
+  name: "MenuHome",
+}
 
 </script>
 

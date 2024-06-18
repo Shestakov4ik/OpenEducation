@@ -6,7 +6,10 @@ import Contacts from './components/main-components/Contacts.vue';
 import Auth from './components/authorization/auth.vue';
 import Verification from './components/authorization/verification.vue';
 import CoursesInfo from "@/components/course-info/CoursesInfo.vue";
-import Cabinet from "@/components/cabinet/main-cab.vue";
+import Cabinet from "@/components/cabinet/Cabinet.vue";
+import HomeCab from "@/components/cabinet/menu-home.vue"
+import CoursesCab from "@/components/cabinet/menu-courses.vue"
+import TasksCab from "components/cabinet/menu-tasks.vue"
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -17,6 +20,10 @@ const routes = [
     { path: '/verification', name: 'Verification', component: Verification },
     { path: '/courseinfo:id', name: 'courseinfo', component: CoursesInfo },
     { path: '/cabinet', name: 'cabinet', component: Cabinet },
+    { path: '/cabhome', name: 'MenuHome', component: HomeCab },
+    { path: '/cabcourses', name: 'MenuCourses', component: CoursesCab },
+    { path: '/cabtasks', name: 'MenuTasks', component: TasksCab },
+
 
 ];
 
