@@ -5,7 +5,7 @@
         <li @click="openStartedCourses">
           <span>Мои курсы</span>
         </li>
-        <li  @click="openAllCourses">
+        <li @click="openAllCourses">
           <span>Доступные курсы</span>
         </li>
         <li @click="openCompletedCourses">
@@ -22,8 +22,7 @@
               class="course-block"
               v-for="course in filteredCourses"
               :key="course.id"
-              :style="{ background: course.color }"
-              @click="this.$emit('openInfo', course.id)">
+              :style="{ background: course.color }">
             <div class="icon-container">
               <img :src="course.url_icon" alt="Icon" class="icon">
             </div>

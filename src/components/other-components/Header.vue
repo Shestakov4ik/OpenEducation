@@ -63,6 +63,7 @@ export default {
   font-family: 'Gilroy-Light', sans-serif;
   font-weight: 600;
   letter-spacing: 0.5px;
+  box-shadow: 0 4px 20px 0 #EEEDF2;
 }
 #logo {
   margin-right: 100px;

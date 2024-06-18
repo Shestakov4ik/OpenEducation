@@ -1,50 +1,63 @@
 <template>
-  <div class="test-container">
-    <div class="back">
-      <p class="close" @click="this.$emit('closeTest', 2)">Закрыть</p>
-    </div>
-    <!-- Название теста -->
-    <div class="test-header">
-      <h1>{{ taskName }}</h1>
-    </div>
-
-    <!-- Вопросы теста -->
-    <div v-if="!isTestCompleted" class="question-section">
-      <!-- Номер вопроса -->
-      <div class="question-number">
-        Вопрос {{ currentQuestionIndex + 1 }} из {{ totalQuestions }}
+  <div class="wrapper">
+    <div class="test-container">
+      <div class="back">
+        <img class="cursor-pointer" src="../../assets/close.svg" alt="" @click="this.$emit('closeTest', 2)">
+      </div>
+      <!-- Название теста -->
+      <div class="test-header">
+        <h1>{{ taskName }}</h1>
       </div>
 
-      <!-- Текст вопроса -->
-      <div class="question-text">
-        {{ currentQuestion.name }}
+      <!-- Вопросы теста -->
+      <div v-if="!isTestCompleted" class="question-section">
+        <!-- Номер вопроса -->
+        <div class="question-number">
+          Вопрос {{ currentQuestionIndex + 1 }} из {{ totalQuestions }}
+        </div>
+
+        <!-- Текст вопроса -->
+        <div class="question-text">
+          {{ currentQuestion.name }}
+        </div>
+
+        <!-- Варианты ответа -->
+        <div class="answer-options">
+          <button @click="selectAnswer(true)" :disabled="answerSelected" id="answer-opt-true">Правда</button>
+          <button @click="selectAnswer(false)" :disabled="answerSelected" id="answer-opt-false">Ложь</button>
+        </div>
+
+        <!-- Кнопка "Ответить" или "Далее" -->
+        <div class="answer-btn">
+          <div v-if="!answerSelected">
+            <button @click="checkAnswer" :disabled="!isAnswerSelected">Ответить</button>
+          </div>
+          <div v-else>
+            <button @click="nextQuestion">Далее</button>
+          </div>
+        </div>
+
+
+        <!-- Обратная связь -->
+        <div v-if="feedback" class="feedback" :class="{ incorrect: !isCorrectAnswer }">
+          {{ feedback }}
+        </div>
       </div>
 
-      <!-- Варианты ответа -->
-      <div class="answer-options">
-        <button @click="selectAnswer(true)" :disabled="answerSelected">Правда</button>
-        <button @click="selectAnswer(false)" :disabled="answerSelected">Ложь</button>
+      <!-- Теги -->
+      <div class="tags">
+        <div class="type">Задание</div>
+        <div class="direction">Мобильная разработка</div>
+        <div class="tariff">Базовый</div>
       </div>
 
-      <!-- Кнопка "Ответить" или "Далее" -->
-      <div v-if="!answerSelected">
-        <button @click="checkAnswer" :disabled="!isAnswerSelected">Ответить</button>
+      <!-- Результат теста -->
+      <div v-if="isTestCompleted" class="test-result">
+        <h2>{{ resultMessage }}</h2>
       </div>
-      <div v-else>
-        <button @click="nextQuestion">Далее</button>
-      </div>
-
-      <!-- Обратная связь -->
-      <div v-if="feedback" class="feedback" :class="{ incorrect: !isCorrectAnswer }">
-        {{ feedback }}
-      </div>
-    </div>
-
-    <!-- Результат теста -->
-    <div v-if="isTestCompleted" class="test-result">
-      <h2>{{ resultMessage }}</h2>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -116,6 +129,16 @@ export default {
     },
     selectAnswer(answer) {
       this.selectedAnswer = answer;
+      let trueBtn = document.querySelector('#answer-opt-true')
+      let falseBtn = document.querySelector('#answer-opt-false')
+      if (answer) {
+        trueBtn.classList.add('option-active')
+        falseBtn.classList.remove('option-active')
+      }
+      else {
+        trueBtn.classList.remove('option-active')
+        falseBtn.classList.add('option-active')
+      }
     },
     checkAnswer() {
       const correctAnswer = this.currentQuestion.answer;
@@ -138,60 +161,125 @@ export default {
       } else {
         this.isTestCompleted = true;
       }
+      document.querySelector('#answer-opt-true').classList.remove('option-active')
+      document.querySelector('#answer-opt-false').classList.remove('option-active')
     }
   }
 };
 </script>
 
 <style scoped>
-.close{
-  font-family: Gilroy-Light, sans-serif;
-  font-size: 20px;
-  letter-spacing: 0.5px;
-  margin: 0;
-  text-decoration: underline;
+
+.cursor-pointer {
   cursor: pointer;
 }
 .test-container {
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: Gilroy, sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
-.test-header {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 50px;
+.test-header h1 {
+  font-size: 46px;
+  font-weight: 900;
 }
 
 .question-section {
-  margin-top: 50px;
+  border-radius: 20px;
+  background-color: #EEEDF2;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }
 
 .question-number {
-  font-size: 24px;
-  margin-bottom: 10px;
+  font-size: 32px;
+  font-weight: 900;
 }
 
 .question-text {
-  font-size: 20px;
-  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .answer-options {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
 }
 
 .answer-options button {
+  font-family: Gilroy, sans-serif;
+  font-weight: 500;
   font-size: 18px;
-  padding: 10px 20px;
+  color: #78258D;
+  line-height: 18px;
+  width: 110px;
+  height: 30px;
+  padding: 0 10px;
   cursor: pointer;
+  border: 2px solid #78258D;
+  border-radius: 8px;
+  background-color: inherit;
+  transition: all ease 0.2s;
+}
+.answer-options button:hover,
+.answer-options button:active,
+.option-active {
+  background-color: #78258d !important;
+  color: white !important;
+}
+
+.answer-btn button {
+  font-family: Gilroy, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: white;
+  line-height: 18px;
+  width: 230px;
+  height: 40px;
+  padding: 0 10px;
+  cursor: pointer;
+  border: 2px solid #78258D;
+  border-radius: 8px;
+  background-color: #78258d;
+  transition: all ease 0.2s;
+}
+.answer-btn button:hover,
+.answer-btn button:active {
+  background-color: #78258d75;
+  border-color: #78258D00;
+}
+
+.tags {
+  display: flex;
+  gap: 30px;
+  margin: 30px 0;
+}
+.tags div {
+  border-radius: 8px;
+  padding: 5px 20px;
+  font-family: Gilroy, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+.tags .type {
+  background-color: #EEEDF2;
+  color: black;
+}
+.tags .direction {
+  background-color: #0007;
+  color: #EEEDF2;
+}
+.tags .tariff {
+  background-color: #2E90D1;
+  color: white;
 }
 
 .feedback {
   font-size: 18px;
   margin-bottom: 20px;
+  color: #007BFF;
 }
 
 .feedback.incorrect {
