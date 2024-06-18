@@ -18,7 +18,7 @@ const routes = [
     { path: '/auth', name: 'Auth', component: Auth },
     { path: '/courseinfo:id', name: 'courseinfo', component: CoursesInfo },
     {
-        path: '/cabinet',
+        path: '/cabinet:id',
         component: Cabinet,
         children: [
             {

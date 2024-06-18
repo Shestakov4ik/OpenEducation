@@ -22,11 +22,19 @@ import router from "@/router.js";
 export default {
   name: 'Header',
   props: {
-    auth: Boolean
+    auth: Boolean,
+    userId: Number
+  },
+  data(){
+    return{
+      id:null
+    }
   },
   methods:{
     openCab(){
-      router.push("/cabinet")
+      console.log("UserIdHeader", this.userId)
+      this.id=this.userId
+      router.push({name: 'cabinet', params: this.id})
     }
   }
 };

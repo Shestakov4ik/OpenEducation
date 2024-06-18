@@ -2,6 +2,7 @@
   <div v-if="this.Check">
     <Header class="header"
             :auth="auth"
+            :userId="userId"
             @checK="check"
             @change-page="PageChange"/>
     <router-view :userId="userId"/>
