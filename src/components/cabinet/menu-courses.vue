@@ -22,6 +22,7 @@
               class="course-block"
               v-for="course in filteredCourses"
               :key="course.id"
+              @click="openLessons"
               :style="{ background: course.color }">
             <div class="icon-container">
               <img :src="course.url_icon" alt="Icon" class="icon">
@@ -45,6 +46,7 @@
 
 <script>
   import supabase from "@/supabase.js";
+  import router from "@/router.js";
 
   export default {
     name: "cabCourses",
@@ -87,6 +89,9 @@
       async openStartedCourses() {
         this.courseStatus = 'started';
         await this.fetchData();
+      },
+      openLessons(){
+        router.push("/cabinet/lessons")
       },
       async openCompletedCourses() {
         this.courseStatus = 'completed';

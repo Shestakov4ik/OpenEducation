@@ -9,6 +9,7 @@ import Cabinet from "./components/cabinet/Cabinet.vue";
 import HomeCab from "./components/cabinet/menu-home.vue"
 import CoursesCab from "./components/cabinet/menu-courses.vue"
 import TasksCab from "./components/cabinet/menu-tasks.vue"
+import ListLessons from "./components/cabinet/lessons.vue"
 
 const routes = [
     { path: '/', name: 'Home', component: Home },
@@ -44,6 +45,12 @@ const routes = [
                 path: 'tasks',
                 name: 'cabTasks',
                 component: TasksCab,
+                props: true
+            },
+            {
+                path: 'lessons',
+                name: 'less',
+                component: ListLessons,
                 props: true
             },
         ]

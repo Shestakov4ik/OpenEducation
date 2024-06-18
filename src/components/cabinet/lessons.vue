@@ -3,6 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import supabase from "@/supabase.js";
 
 export default {
+  name:"less",
   props: {
     course: Number,
   },
@@ -21,7 +22,7 @@ export default {
 
 <template>
 
-lessons
+lessonsgfsags
 
 </template>
 
